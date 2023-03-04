@@ -1,7 +1,7 @@
 
 <template>
    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
-      <div class="relative mx-auto w-full">
+      <div class="relative mx-auto w-full" >
          <a href="#"
             class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
             <div class="shadow p-4 rounded-lg bg-white">
@@ -49,7 +49,7 @@
 
                <div class="mt-4">
                   <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
-                     Statue of Liberty
+                     {{ cruise.name }}
                   </h2>
                   <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
                      New York, NY 10004, United States
@@ -176,7 +176,7 @@
 
                <div class="mt-4">
                   <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
-                     Statue of Liberty
+                     {{ cruise[1].name }}
                   </h2>
                   <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
                      New York, NY 10004, United States
@@ -258,26 +258,22 @@
    </div>
 </template>
 
+
+
+
+
 <script>
-
-
-
-</script>
-
-
-
-<!-- <script>
 
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 export default {
    setup() {
-      const items = ref([]);
+      const cruise = ref([]);
 
       const fetchData = async () => {
-         const response = await axios.get('');
-         items.value = response.data;
+         const response = await axios.get('http://localhost/Fill_Rouge/backend/cruiseController/getCruise');
+         cruise.value = response.data;
       };
 
 
@@ -285,8 +281,8 @@ export default {
          fetchData();
       });
 
-      return { items };
+      return { cruise };
 
    },
 };
-</script> -->
+</script>

@@ -6,14 +6,15 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
     <div class="bg-black">
+        
 
         <nav class="navbar">
             <ul>
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                <li><RouterLink to="/about"><div class="nav-link scrollto">About</div></RouterLink></li>
+                <li><RouterLink to="/Admin"><a class="nav-link scrollto" >Admin</a></RouterLink></li>
+                <li><RouterLink to="/about"><a class="nav-link scrollto ">Portfolio</a></RouterLink></li>
+                <li><RouterLink to="/about"><a class="nav-link scrollto" href="#team">Team</a></RouterLink></li>
                 <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="#">Drop Down 1</a></li>
@@ -39,6 +40,7 @@ import { RouterLink, RouterView } from 'vue-router'
         </nav><!-- .navbar -->
 
     </div>
+    <RouterView />
 </template>
 
 

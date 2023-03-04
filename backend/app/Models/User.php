@@ -1,44 +1,65 @@
 <?php
+// require_once '../libraries/DB.php';
 
-namespace App\Models;
+class user{
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-
-class User extends Authenticatable
+private $database;
+public function __construct()
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    $this->database = new DB;
+}
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+//find user by email
+public function getUserByEmail($email)
+{
+    $this->database->query("SELECT * FROM users WHERE Email=:email");
+    $this->database->bind(":email",$email);
+    $this->database->execute(); 
+    $fetch = $this->database->fetch();
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    if($this->database->rowCount() > 0){
+        return true;
+    }else{
+        return false;
+    }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+}
+
+
+public function register($data){
+    $this->database->query('INSERT INTO users (name, email, password)VALUES (:name, :email, :password)');
+
+    // Bind values
+    $this->database->bind(':name', $data['name']);
+
+    $this->database->bind(':email', $data['email']);
+    $this->database->bind(':password', $data['password']);
+
+    // Execute
+    if($this->database->execute()){
+        return true;
+    } else{
+        return false;
+    }
+
+}
+
+
+
+public function login($email, $password){
+    $this->database->query('SELECT * FROM users WHERE email = :email');
+    $this->database->bind(':email', $email);
+
+    $result = $this->database->fetch();
+
+    $hashed_password = $result->password;
+
+    if(password_verify($password, $hashed_password)){
+        return $result;
+    } else{
+        return false;
+    }
+}
+
+
 }

@@ -13,3 +13,28 @@
   }
 }
 </style>
+<!-- <script>
+
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+export default {
+  
+   setup() {
+      const items = ref([]);
+
+      const fetchData = async () => {
+         const response = await axios.get('');
+         items.value = response.data;
+      };
+
+
+      onMounted(() => {
+         fetchData();
+      });
+
+      return { items };
+
+   },
+};
+</script> -->

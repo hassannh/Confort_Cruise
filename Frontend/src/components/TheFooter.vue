@@ -68,6 +68,6 @@
         Designed by <a href="">Hassan Nouhi</a>
       </div>
     </div>
-  </footer>End Footer
+  </footer>
 
 </template>

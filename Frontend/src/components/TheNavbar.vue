@@ -20,7 +20,7 @@ import { RouterLink, RouterView } from 'vue-router'
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/Admin"><a class="nav-link scrollto">Admin</a></RouterLink>
+                    <RouterLink to="/dashboard"><a class="nav-link scrollto">Admin</a></RouterLink>
                 </li>
                 <li>
                     <RouterLink to="/"><a class="nav-link scrollto ">Portfolio</a></RouterLink>
@@ -47,8 +47,8 @@ import { RouterLink, RouterView } from 'vue-router'
                 </li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 <i class="bi bi-list mobile-nav-toggle"></i>
-                <RouterLink to="/login">
-                    <a href="#" class="get-started-btn sign" style="width: 120px;
+                <RouterLink to="/register">
+                    <a class="get-started-btn sign" style="width: 120px;
                                                     padding: 7px;">Get Started</a>
                 </RouterLink>
             </ul>

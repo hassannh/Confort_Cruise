@@ -32,12 +32,6 @@ class cruiseController extends Controller
     }
 
 
-    public function hello()
-    {
-        $hello = 'hellllllllo';
-        echo json_encode($hello);
-        die();
-    }
 
          public function Admin()
      {
@@ -49,7 +43,7 @@ class cruiseController extends Controller
             $data = [
                 'cruises' => $cruises
                     ];
-            $this->view('Admin',$data);
+                    echo json_encode($cruises);
         } else {
             echo('cruise not found');
         }
@@ -100,14 +94,16 @@ class cruiseController extends Controller
        
         // $ports = $this->portModel->getport();
             $navires = $this->shipModel->getship();
-        $data=[
-            'cards'=>$cards,
+        // $data=[
+        //     'cards'=>$cards,
            
-            // 'ports' => $ports,
-                    'navires' => $navires
-        ];
+        //     // 'ports' => $ports,
+        //             'navires' => $navires
+        // ];
 
-        $this->view('booking',$data);
+        // $this->view('booking',$data);
+
+        echo json_encode( $cards);
     }
 
 
@@ -197,20 +193,28 @@ class cruiseController extends Controller
     }
 
 
-    public function order($id)
+    public function order()
     {
-        $cruise = $this->cruiseModel->getCruise($id);
-        $room_type = $this->type_roomModel->getRoomTypes();
-        $port = $this->portModel->getports();
-        $trajet = $this->cruiseModel->gettrajet($id);
-        $data = [
-            'cruise'=>$cruise,
-            'roomType'=> $room_type,
-            'trajet'=>$trajet,
-            'ports'=>$port
-        ];
-     
-        $this->view('book_now',$data);
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $id = json_decode(file_get_contents("php://input"));
+            // echo json_encode($id->id);
+            // die;
+
+            $cruise = $this->cruiseModel->getCruise($id->id);
+            $room_type = $this->type_roomModel->getRoomTypes();
+            $port = $this->portModel->getports();
+            $trajet = $this->cruiseModel->gettrajet($id->id);
+            $data = [
+                'cruise'=>$cruise,
+                'roomType'=> $room_type,
+                'trajet'=>$trajet,
+                'ports'=>$port
+            ];
+         
+            // $this->view('book_now',$data);
+            echo json_encode($data);
+            die;
+        }
     }
 
 

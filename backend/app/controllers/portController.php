@@ -38,12 +38,12 @@ public function add_port()
        // get the port
        $ports = $this->portModel->getport();
 
-
+       
        if ($ports) {
            $data = [
                'ports' => $ports
                    ];
-           $this->view('Admin_ports',$data);
+                   echo json_encode($ports);
        } else {
            echo('ports not found');
        }

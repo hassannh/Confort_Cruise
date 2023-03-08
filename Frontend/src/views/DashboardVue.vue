@@ -56,8 +56,7 @@
 
 
 
-                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="cruise in cruises"
-                                    :key="cruise.id">
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="cruise in cruises" :key="cruise.id">
 
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">

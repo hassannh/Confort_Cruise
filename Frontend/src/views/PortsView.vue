@@ -52,18 +52,15 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
-                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="port in ports" :key="port.id">
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="port in portss" :key="port.id">
 
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ port.id }}
-                                    </td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ port.name }}
                                     </td>
-                                    <td
-                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                        <!-- {{ port.name }} -->
+                                    </td>
+                                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     </td>
                                     <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                                         <a href="<?= URLROOT ?>cruiseController/delete_cruise/<?= $cruise->ID_cruise ?>"
@@ -78,9 +75,9 @@
                 </div>
             </div>
         </div>
-        <!-- <a class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Cruise</a> -->
+        
         <a class="btn btn-sm btn-primary mx-5"><i class="fa fa-plus"></i> New Port</a>
-        <!-- <a class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Ship</a> -->
+        
     </div>
 </template>
 
@@ -93,11 +90,11 @@ import axios from 'axios';
 
 export default {
     setup() {
-        const ports = ref([]);
+        const portss = ref([]);
 
         const fetchData = async () => {
             const response = await axios.post('http://localhost/Fill_Rouge/backend/portController/admin_ports');
-            ports.value = response.data;
+            portss.value = response.data;
         };
 
 
@@ -106,7 +103,7 @@ export default {
             // console.log(response.data);
         });
 
-        return { ports };
+        return { portss };
 
     },
 };

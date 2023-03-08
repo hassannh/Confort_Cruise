@@ -2,7 +2,7 @@
 
 
 
-<form class="w-[50%] justify-center mx-8 my-8">
+<form class="w-[50%] justify-center mx-8 my-8" @submit.prevent="Submit">
   
   <div class="mb-6">
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">Your email</label>
@@ -10,7 +10,7 @@
   </div>
   <div class="mb-6">
     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-    <input type="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+    <input type="password" v-model="form.password"  id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
   </div>
   <div class="flex items-start mb-6">
     <div class="flex items-center h-5">
@@ -29,3 +29,35 @@
 
 
 </template>
+
+
+
+<script>
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      form: {
+        email: '',
+        password: ''
+      },
+    }
+  },
+  methods: {
+ 
+    async Submit() {
+      try {
+        axios.post('http://localhost/Fill_Rouge/backend/usersController/login', JSON.stringify(this.form))
+        .then(res => {
+          localStorage.setItem("id_user", JSON.stringify( res.data.user.id ));
+        })
+        
+      this.$router.push({ path: "/" });
+      } catch (error) {
+        console.error(error)
+      }
+    },
+  
+}
+}
+</script>

@@ -5,15 +5,22 @@
             <h1
                 class="text-6xl font-extrabold tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 mb-4">
                 Dashboard Controller</h1>
-            <div class="overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="shadow-md sm:rounded-lg mt-4">
 
 
                 <div class="gap-3 flex flex-row justify-center mb-5">
-                    <a href="<?= URLROOT ?>cruiseController/admin"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Cruises</a>
-                        <RouterLink to="/ports"><a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ports</a></RouterLink>
-                    <a href="<?= URLROOT ?>navireController/admin_ships"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ships</a>
+                    <RouterLink to="/dashboard">
+                        <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Cruises</a>
+                    </RouterLink>
+
+                    <RouterLink to="/ports">
+                        <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ports</a>
+                    </RouterLink>
+
+                    <RouterLink to="/ships">
+                        <a  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ships</a>
+                    </RouterLink>
+
                 </div>
 
 
@@ -78,8 +85,8 @@
             </div>
         </div>
         <a href="<?= URLROOT ?>Pages/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Cruise</a>
-        <a href="<?= URLROOT ?>Pages/add_port" class="btn btn-sm btn-primary mx-5"><i class="fa fa-plus"></i> New Port</a>
-        <a href="<?= URLROOT ?>Pages/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Ship</a>
+        <!-- <a href="<?= URLROOT ?>Pages/add_port" class="btn btn-sm btn-primary mx-5"><i class="fa fa-plus"></i> New Port</a> -->
+        <!-- <a href="<?= URLROOT ?>Pages/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Ship</a> -->
     </div>
 </template>
 
@@ -95,8 +102,7 @@ export default {
         const cruises = ref([]);
 
         const fetchData = async () => {
-            const response = await axios.post('http://localhost/Fill_Rouge/backend/cruiseController/Admin',
-                { 'id': 2 });
+            const response = await axios.post('http://localhost/Fill_Rouge/backend/cruiseController/Admin');
             cruises.value = response.data;
         };
 

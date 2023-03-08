@@ -1,23 +1,23 @@
 <template>
 
-    <!-- component -->
+    <!-- http://localhost/fill_rouge/backend/app/controllers/usersController/register -->
   
-<form class="w-[30%] justify-center mx-8 my-8">
+<form class="w-[30%] justify-center mx-8 my-8" @submit.prevent="handleSubmit">
   <div class="mb-6">
     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">Your name</label>
-    <input type="text" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Your name" required>
+    <input type="text" v-model="form.username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Your name" required>
   </div>
   <div class="mb-6">
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">Your email</label>
-    <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required>
+    <input type="email" v-model="form.email"  id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required>
   </div>
   <div class="mb-6">
     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-    <input type="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+    <input type="password" v-model="form.password"  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
   </div>
   <div class="mb-6">
     <label for="repeat-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat password</label>
-    <input type="password" id="repeat-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+    <input type="password" name="confirm_password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
   </div>
   <div class="flex items-start mb-6">
     <div class="flex items-center h-5">
@@ -34,3 +34,37 @@
 
 
 </template>
+
+
+<script>
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      form: {
+        username: '',
+        email: '',
+        password: '',
+        confirm_password: ''
+      },
+    }
+  },
+
+  methods: {
+    async handleSubmit() {
+      try {
+        axios.post('http://localhost/Fill_Rouge/backend/usersController/register', JSON.stringify(this.form))
+          .then(res => res.data.resulte)
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        this.$router.push({ path: "/login" });
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+  }
+}
+</script>

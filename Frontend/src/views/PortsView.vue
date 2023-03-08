@@ -5,17 +5,20 @@
             <h1
                 class="text-6xl font-extrabold tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 mb-4">
                 Dashboard Controller</h1>
-            <div class="overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="shadow-md sm:rounded-lg mt-4">
 
 
                 <div class="gap-3 flex flex-row justify-center mb-5">
                     <RouterLink to="/dashboard"> <a
                             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Cruises</a>
                     </RouterLink>
-                    <a href="<?= URLROOT ?>portController/admin_ports"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ports</a>
-                    <a href="<?= URLROOT ?>navireController/admin_ships"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ships</a>
+                    <RouterLink to="/ports">
+                        <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ports</a>
+                    </RouterLink>
+                    <RouterLink to="/ships">
+                        <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ships</a>
+                    </RouterLink>
+
                 </div>
 
 
@@ -53,7 +56,7 @@
 
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <!-- {{ port.id }} -->
+                                        {{ port.id }}
                                     </td>
                                     <td
                                         class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
@@ -75,9 +78,9 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Cruise</a>
+        <!-- <a class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Cruise</a> -->
         <a class="btn btn-sm btn-primary mx-5"><i class="fa fa-plus"></i> New Port</a>
-        <a class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Ship</a>
+        <!-- <a class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Ship</a> -->
     </div>
 </template>
 
@@ -93,15 +96,14 @@ export default {
         const ports = ref([]);
 
         const fetchData = async () => {
-            const response = await axios.post('http://localhost/Fill_Rouge/backend/portController/admin_ports',
-                { 'id': 2 });
+            const response = await axios.post('http://localhost/Fill_Rouge/backend/portController/admin_ports');
             ports.value = response.data;
         };
 
 
         onMounted(() => {
             fetchData();
-            console.log(response);
+            // console.log(response.data);
         });
 
         return { ports };

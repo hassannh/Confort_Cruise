@@ -83,7 +83,10 @@
                 </div>
             </div>
         </div>
-        <a href="<?= URLROOT ?>Pages/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Cruise</a>
+        <RouterLink to="/add_cruise">
+            <a class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Cruise</a>
+        </RouterLink>
+
         <!-- <a href="<?= URLROOT ?>Pages/add_port" class="btn btn-sm btn-primary mx-5"><i class="fa fa-plus"></i> New Port</a> -->
         <!-- <a href="<?= URLROOT ?>Pages/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Ship</a> -->
     </div>

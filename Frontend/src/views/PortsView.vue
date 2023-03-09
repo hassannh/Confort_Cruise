@@ -52,7 +52,7 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
-                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="port in portss" :key="port.id">
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="port in ports" :key="port.id">
 
                                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ port.name }}
@@ -90,11 +90,11 @@ import axios from 'axios';
 
 export default {
     setup() {
-        const portss = ref([]);
+        const ports = ref([]);
 
         const fetchData = async () => {
-            const response = await axios.post('http://localhost/Fill_Rouge/backend/portController/admin_ports');
-            portss.value = response.data;
+            const response = await axios.get('http://localhost/Fill_Rouge/backend/portController/admin_ports');
+            ports.value = response.data;
         };
 
 
@@ -103,7 +103,7 @@ export default {
             // console.log(response.data);
         });
 
-        return { portss };
+        return { ports };
 
     },
 };

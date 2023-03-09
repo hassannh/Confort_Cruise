@@ -6,6 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import DashboardVue from '../views/DashboardVue.vue'
 import PortsView from '../views/PortsView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import AddCruise from '../components/AddCruise.vue'
 
 
 const router = createRouter({
@@ -35,6 +36,11 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardVue
+    },
+    {
+      path: '/add_cruise',
+      name: 'add_cruise',
+      component: AddCruise
     },
     {
       path: '/ports',

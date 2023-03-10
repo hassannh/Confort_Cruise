@@ -49,29 +49,30 @@ class Cruise
     
 
 
-    public function insertCruise($name, $ship, $price, $picture, $nights, $ports, $date,array $trajet)
+    public function insertCruise($data)
     {
 
+     
 
-        $this->db->query("INSERT INTO `cruise` (`name`, `ship`, `price`,`picture`, `nights_number` ,`id_port`, `start_date`)
-            VALUES     (:name,:ship,:price,:picture,:nights,:ports,:start_date)");
-        $this->db->bind(':name', $name);
-        $this->db->bind(':ship', $ship);
-        $this->db->bind(':price', $price);
-        $this->db->bind(':picture', $picture);
-        $this->db->bind(':nights', $nights);
-        $this->db->bind(':ports', $ports);
-        $this->db->bind(':start_date', $date);
+        $this->db->query("INSERT INTO `cruise` (`name`, `ship`, `price`,`picture`, `nights_number` ,`id_port`, `start_date`,`trager`)
+            VALUES     (:name,:ship,:price,:picture,:nights,:ports,:start_date,:trajet)");
+        $this->db->bind(':name', $data);
+        $this->db->bind(':ship', $data);
+        $this->db->bind(':price', $data);
+        $this->db->bind(':picture', $data);
+        $this->db->bind(':nights', $data);
+        $this->db->bind(':ports', $data);
+        $this->db->bind(':start_date', $data);
+        $this->db->bind(':trajet', $data);
 
-        // $this->db->bind(':Picture',$Picture);
         if ($this->db->execute()) {
             $sql = "SELECT `ID_cruise` FROM `cruise` order by ID_cruise desc limit 1";
             $stmt = $this->db->query($sql);
             $this->db->execute();
 
             $data = $stmt->fetch();
-            for ($i = 0; $i < count($trajet); $i++) {
-                $this->addtrajet($data['ID_cruise'], $trajet[$i]);
+            for ($i = 0; $i < count($data['trajet']); $i++) {
+                $this->addtrajet($data['ID_cruise'], $data['trajet'][$i]);
             }
             return true;
         };

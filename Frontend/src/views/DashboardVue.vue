@@ -20,6 +20,9 @@
                     <RouterLink to="/ships">
                         <a  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ships</a>
                     </RouterLink>
+                    <RouterLink to="/companies">
+                        <a  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Companies</a>
+                    </RouterLink>
 
                 </div>
 

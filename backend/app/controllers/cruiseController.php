@@ -57,25 +57,29 @@ class cruiseController extends Controller
 
     public function add_cruise()
     {
-        if (isset($_POST['submit'])) {
-        
-            $name = $_POST['name'];
-            $ship = $_POST['ship'];
-            $price = $_POST['price'];
-            $picture = $_POST['picture'];
-            $nights = $_POST['nights'];
-            $ports = $_POST['ports'];
-            $Date = $_POST['Date'];
-            $trajet = $_POST['trajet'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $data = json_decode(file_get_contents("php://input"));
+        $data = [
 
-            // echo '<pre>';
-            // var_dump($_POST);
-            // echo '</pre>';
-            // exit;
-            $this->cruiseModel->insertCruise($name,$ship ,$price,$picture ,$nights,$ports,$Date, $trajet);
-            return $this->Admin();
+            'name' => $data->name,
+            'ship' => $data->ship,
+            'price'=> $data->price,
+            'picture'=> $data->picture,
+            'nights' => $data->nights,
+            'ports' => $data->ports,
+            'Date' => $data->Date,
+            'trajet' => $data->trajet,
+        ];
+
+      
+
+          
+            $this->cruiseModel->insertCruise($data  );
+        
+            echo json_encode($data);
+            
         }else{
-            $this->view('add_cruise');
+            echo('cruise not found');
         }
         
     }

@@ -27,10 +27,10 @@ public function getUserByEmail($email)
 
 
 public function register($data){
-    $this->database->query('INSERT INTO users (name, email, password)VALUES (:name, :email, :password)');
+    $this->database->query('INSERT INTO users (name, email, password)VALUES (:username, :email, :password )');
 
     // Bind values
-    $this->database->bind(':name', $data['name']);
+    $this->database->bind(':username', $data['name']);
 
     $this->database->bind(':email', $data['email']);
     $this->database->bind(':password', $data['password']);

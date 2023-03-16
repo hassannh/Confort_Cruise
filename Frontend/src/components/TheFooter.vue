@@ -4,7 +4,7 @@
  <footer id="footer">
     <div class="footer-top">
       <div class="container">
-        <div class="row flex flex-row" style="justify-content: space-around">
+        <div class="row flex flex-row flex-wrap" style="justify-content: space-around">
 
           <div class="col-lg-3 col-md-6">
             <div class="footer-info">

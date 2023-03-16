@@ -1,6 +1,10 @@
 
 <?php
-class navire extends Controller{
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Methods: GET');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
+class navireController extends Controller{
 
     public $navireModel;
 
@@ -10,12 +14,17 @@ class navire extends Controller{
         
     }
 
+    public function getship()
+    {
+        $ships = $this->navireModel->getship();
+       
+        echo json_encode($ships);
+    }
+
+    
+
     public function admin_ships()
     {
-        echo '<pre>';
-        var_dump('hhhhhhhhhhhhhhhhhh');
-        echo '</pre>';
-        exit;
        // get the ship
        $ships = $this->navireModel->getship();
 
@@ -25,7 +34,8 @@ class navire extends Controller{
            $data = [
                'ships' => $ships
                    ];
-           $this->view('admin_ships',$data);
+        //    $this->view('admin_ships',$data);
+        echo json_encode($ships);
        } else {
            echo('ship not found');
        }

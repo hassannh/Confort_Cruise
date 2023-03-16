@@ -1,5 +1,10 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Methods: GET');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
 class portcontroller extends Controller{
 
 public $portModel;
@@ -10,14 +15,15 @@ public function __construct()
     $this->portModel = $this->model('port');
 }
 
-// public function getPort()
-// {
-//     $port = $this->portModel->getport();
-//     $data=[
-//         'port'=>$port
-//     ];
-//     $this->view('booking',$data);
-// }
+public function getPort()
+{
+    $port = $this->portModel->getport();
+    $data=[
+        'port'=>$port
+    ];
+    // $this->view('booking',$data);
+    echo json_encode($data);
+}
 
 public function add_port()
     {

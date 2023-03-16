@@ -58,7 +58,9 @@ class cruiseController extends Controller
     public function add_cruise()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
             $data = json_decode(file_get_contents("php://input"));
+            
         $data = [
 
             'name' => $data->name,
@@ -71,10 +73,8 @@ class cruiseController extends Controller
             'trajet' => $data->trajet,
         ];
 
-      
-
-          
             $this->cruiseModel->insertCruise($data  );
+            
         
             echo json_encode($data);
             

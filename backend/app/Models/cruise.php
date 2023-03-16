@@ -56,15 +56,16 @@ class Cruise
 
         $this->db->query("INSERT INTO `cruise` (`name`, `ship`, `price`,`picture`, `nights_number` ,`id_port`, `start_date`,`trager`)
             VALUES     (:name,:ship,:price,:picture,:nights,:ports,:start_date,:trajet)");
-        $this->db->bind(':name', $data);
-        $this->db->bind(':ship', $data);
-        $this->db->bind(':price', $data);
-        $this->db->bind(':picture', $data);
-        $this->db->bind(':nights', $data);
-        $this->db->bind(':ports', $data);
-        $this->db->bind(':start_date', $data);
-        $this->db->bind(':trajet', $data);
+        $this->db->bind(':name', $data->name);
+        $this->db->bind(':ship', $data->ship);
+        $this->db->bind(':price', $data->price);
+        $this->db->bind(':picture', $data->picture);
+        $this->db->bind(':nights', $data->nights);
+        $this->db->bind(':ports', $data->ports);
+        $this->db->bind(':start_date', $data->start_date);
+        $this->db->bind(':trajet', $data->trajet);
 
+    
         if ($this->db->execute()) {
             $sql = "SELECT `ID_cruise` FROM `cruise` order by ID_cruise desc limit 1";
             $stmt = $this->db->query($sql);

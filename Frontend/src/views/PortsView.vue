@@ -18,6 +18,9 @@
                     <RouterLink to="/ships">
                         <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ships</a>
                     </RouterLink>
+                    <RouterLink to="/companies">
+                        <a  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Companies</a>
+                    </RouterLink>
 
                 </div>
 
@@ -55,10 +58,10 @@
                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" v-for="port in ports" :key="port.id">
 
                                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ port.name }}
+                                        {{ port.id }}
                                     </td>
                                     <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                        <!-- {{ port.name }} -->
+                                        {{ port.name }}
                                     </td>
                                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     </td>

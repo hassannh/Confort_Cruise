@@ -3,7 +3,7 @@
 
         <div class="flex flex-col">
             <h1
-                class="text-6xl font-extrabold tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 mb-4">
+                class="text-6xl font-extrabold tracking-tighter text-center  mb-4">
                 Dashboard Controller</h1>
             <div class="shadow-md sm:rounded-lg mt-4">
 

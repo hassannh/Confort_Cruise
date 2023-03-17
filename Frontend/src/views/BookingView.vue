@@ -1,101 +1,69 @@
+
 <template>
-  <div class="backgraund">
-    <div class="">
-      <div
-        class="mt-5"
-        style="
-          margin: 0;
-          font-size: 56px;
-          font-weight: 700;
-          line-height: 64px;
-          color: #fff;
-          text-align: center;
-          font-family: sans-serif;
-        "
-      >
-        <!-- <div class="xl:col-span-6 lg:col-span-8"> -->
-        <h1>
-          Powerful Digital <br />
-          Cruise Booking With Cruise.T<span>.</span>
-        </h1>
-      </div>
-      <h2
-        style="
-          font-size: 26px;
-          font-weight: 30;
-          line-height: 24px;
-          color: #fff;
-          text-align: center;
-        "
-      >
-        We are team of talented digital marketers
-      </h2>
+    <div class="backgraund">
+ 
+ <div class="">
+ 
+ 
+     <div class="mt-5" style="margin: 0;font-size: 56px;font-weight: 700;line-height: 64px;color: #fff;text-align: center;font-family:sans-serif;">
+         <!-- <div class="xl:col-span-6 lg:col-span-8"> -->
+         <h1>Powerful Digital <br> Cruise Booking With Cruise.T<span>.</span></h1>
+     </div>
+     <h2 style="font-size: 26px;
+                 font-weight: 30;
+                 line-height: 24px;
+                 color: #fff;
+                 text-align: center;">We are team of talented digital marketers</h2>
+ 
+     <section class="flex flex-row gap-y-4 mt-5 justify-center">
+ 
+ 
+         <div class="flex flex-row gap-12" data-aos="fade-up">
+             <div class="row gy-4 mt-5 justify-content-center">
+                 <div class="get-started-btn sign">
+                     <div class="">
+                         <i class="ri-store-line"></i>
+                         <h3><a href="">Lorem Ipsum</a></h3>
+                     </div>
+                 </div>
+             </div>
+ 
+             <div class="row gy-4 mt-5 justify-content-center">
+                 <div class="get-started-btn sign">
+                     <div class="icon-box">
+                         <i class="ri-store-line"></i>
+                         <h3><a href="">Lorem Ipsum</a></h3>
+                     </div>
+                 </div>
+             </div>
+             <div class="row gy-4 mt-5 justify-content-center">
+                 <div class="get-started-btn sign">
+                     <div class="icon-box">
+                         <i class="ri-store-line"></i>
+                         <h3><a href="">Lorem Ipsum</a></h3>
+                     </div>
+                 </div>
+             </div>
+             <div class="row gy-4 mt-5 justify-content-center">
+                 <div class="get-started-btn sign">
+                     <div class="icon-box">
+                         <i class="ri-store-line"></i>
+                         <h3><a href="">Lorem Ipsum</a></h3>
+                     </div>
+                 </div>
+             </div>
+ 
+ 
+         </div>
+     </section>
+ 
+ 
+ 
+ </div>
+ 
 
-      <section class="flex flex-row gap-y-4 mt-5 justify-center">
-        <div class="flex flex-row gap-12" data-aos="fade-up">
-          <div class="row gy-4 mt-5 justify-content-center">
-            <div class="get-started-btn sign">
-              <div class="">
-                <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
-              </div>
-            </div>
-          </div>
-
-          <div class="row gy-4 mt-5 justify-content-center">
-            <div class="get-started-btn sign">
-              <div class="icon-box">
-                <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="row gy-4 mt-5 justify-content-center">
-            <div class="get-started-btn sign">
-              <div class="icon-box">
-                <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="row gy-4 mt-5 justify-content-center">
-            <div class="get-started-btn sign">
-              <div class="icon-box">
-                <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <div class="flex justify-center mt-5 mb-5 sm:flex flex-wrap px-6 py-6">
-    <div class="max-w-md mx-4">
-      <h1 class="font-bold">welcome to your cruise tour company</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor sunt
-        ducimus <br />
-        vero in rerum deserunt reiciendis omnis, natus libero quidem? Minus
-        soluta consequatur <br />
-        placeat modi ex vitae perspiciatis nulla nemo. Lorem ipsum dolor sit
-        amet <br />
-        consectetur adipisicing elit. Autem impedit qui libero deserunt quasi
-        optio molestias <br />
-        consequuntur dignissimos provident dolor <br />
-        ut cum modi excepturi, unde iste est blanditiis illum magni.
-      </p>
-    </div>
-
-    <div class="max-w-md mx-4 rounded-md border border-gray-300 p-4">
-      <img src="../../public/pictures/home.jpg" alt="" />
-    </div>
-  </div>
-
-
-  <h1 class="ml-5">NEW CRUISES</h1>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6  mx-3 my-6">
+ </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6  mx-3 my-6">
        <div class="relative mx-auto w-full" v-for="cruise in cruises" :key="cruise.id">
           <a href="#"
              class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
@@ -175,30 +143,35 @@
  
  
     </div>
-</template>
-
-<script>
-
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-
-export default {
-   setup() {
-      const cruises = ref([]);
-
-      const fetchData = async () => {
-         const response = await axios.post('http://localhost/Fill_Rouge/backend/cruiseController/getCruise',
-            { 'id': 2 });
-         cruises.value = response.data;
-      };
-
-
-      onMounted(() => {
-         fetchData();
-      });
-
-      return { cruises };
-
-   },
-};
-</script>
+ </template>
+ 
+ 
+ 
+ 
+ 
+ <script>
+ 
+ import { ref, onMounted } from 'vue';
+ import axios from 'axios';
+ 
+ export default {
+    setup() {
+       const cruises = ref([]);
+ 
+       const fetchData = async () => {
+          const response = await axios.post('http://localhost/Fill_Rouge/backend/cruiseController/getCruise',
+             { 'id': 2 });
+          cruises.value = response.data;
+       };
+ 
+ 
+       onMounted(() => {
+          fetchData();
+       });
+ 
+       return { cruises };
+ 
+    },
+ };
+ </script>
+ 

@@ -5,6 +5,7 @@ import Reservation from '../views/Reservation.vue'
 import LoginView from '../views/LoginView.vue'
 import DashboardVue from '../views/DashboardVue.vue'
 import PortsView from '../views/PortsView.vue'
+import BookingView from '../views/BookingView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AddCruise from '../components/AddCruise.vue'
 
@@ -41,6 +42,11 @@ const router = createRouter({
       path: '/add_cruise',
       name: 'add_cruise',
       component: AddCruise
+    },
+    {
+      path: '/booking',
+      name: 'BookingView',
+      component: BookingView
     },
     {
       path: '/ports',

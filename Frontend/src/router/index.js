@@ -5,6 +5,8 @@ import Reservation from '../views/Reservation.vue'
 import LoginView from '../views/LoginView.vue'
 import DashboardVue from '../views/DashboardVue.vue'
 import PortsView from '../views/PortsView.vue'
+import shipAdmin from '../views/shipAdmin.vue'
+import companyAdmin from '../views/companyAdmin.vue'
 import BookingView from '../views/BookingView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AddCruise from '../components/AddCruise.vue'
@@ -52,6 +54,16 @@ const router = createRouter({
       path: '/ports',
       name: 'ports',
       component: PortsView
+    },
+    {
+      path: '/ships',
+      name: 'ships',
+      component: shipAdmin
+    },
+    {
+      path: '/companies',
+      name: 'companies',
+      component: companyAdmin
     },
     {
       path: '/reservation',

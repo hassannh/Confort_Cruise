@@ -37,7 +37,7 @@
             <div class="get-started-btn sign">
               <div class="">
                 <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
+                <h3><a href="">Parking</a></h3>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@
             <div class="get-started-btn sign">
               <div class="icon-box">
                 <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
+                <h3><a href="">Room</a></h3>
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@
             <div class="get-started-btn sign">
               <div class="icon-box">
                 <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
+                <h3><a href="">Cruise</a></h3>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
             <div class="get-started-btn sign">
               <div class="icon-box">
                 <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
+                <h3><a href="">Pool</a></h3>
               </div>
             </div>
           </div>
@@ -187,14 +187,14 @@ export default {
       const cruises = ref([]);
 
       const fetchData = async () => {
-         const response = await axios.post('http://localhost/Fill_Rouge/backend/cruiseController/getCruise',
-            { 'id': 2 });
-         cruises.value = response.data;
+         const response = await axios.get('/api/cruise');
+         cruises.value = response.data.data;
       };
 
 
       onMounted(() => {
          fetchData();
+         console.log(cruises.value);
       });
 
       return { cruises };

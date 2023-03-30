@@ -6,7 +6,7 @@
   
   <div class="mb-6">
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">Your email</label>
-    <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required>
+    <input type="email" v-model="form.email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="email@test.com" required>
   </div>
   <div class="mb-6">
     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
@@ -44,15 +44,19 @@ export default {
     }
   },
   methods: {
+    async getToken (){
+      await axios.get('/sanctum/csrf-cookie');
+    },
  
     async Submit() {
+      
+      await this.getToken();
       try {
-        axios.post('http://localhost/Fill_Rouge/backend/usersController/login', JSON.stringify(this.form))
-        .then(res => {
-          localStorage.setItem("id_user", JSON.stringify( res.data.user.id ));
-        })
-        
-      this.$router.push({ path: "/" });
+       await axios.post('/login', this.form) 
+        // Save the token to local storage
+        // localStorage.setItem('token', response.data.token);
+        this.$router.push({ path: "/" });
+
       } catch (error) {
         console.error(error)
       }

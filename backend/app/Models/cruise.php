@@ -30,14 +30,6 @@ class Cruise
         $stmt->execute();
     }
     
-    
-
-    function gettrajet($id_croi)
-    {
-        $this->db->query("select p.name from port p inner join trajet t on t.id_port=p.id and t.id_cruise=$id_croi ");
-        $this->db->execute();
-        return $this->db->fetch();
-    }
 
     public function getCruise($id)
     {

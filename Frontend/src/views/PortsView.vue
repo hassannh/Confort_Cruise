@@ -3,7 +3,7 @@
 
         <div class="flex flex-col">
             <h1
-                class="text-6xl font-extrabold tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 mb-4">
+                class="text-6xl font-extrabold tracking-tighter text-center  mb-4">
                 Dashboard Controller</h1>
             <div class="shadow-md sm:rounded-lg mt-4">
 
@@ -96,8 +96,9 @@ export default {
         const ports = ref([]);
 
         const fetchData = async () => {
-            const response = await axios.get('http://localhost/Fill_Rouge/backend/portController/admin_ports');
-            ports.value = response.data;
+            const response = await axios.get('/api/AdminP');
+            ports.value = response.data.port.data;
+            console.log(response.data);
         };
 
 

@@ -21,20 +21,19 @@ class cruiseController extends Controller
         $this->reservationModel = $this->model('reservation');
         $this->shipModel = $this->model('ship');
         $this->portModel = $this->model('port');
-        
     }
 
     public function getCruise()
     {
         $cruise = $this->cruiseModel->getCruises();
-       
+
         echo json_encode($cruise);
     }
 
 
 
-         public function Admin()
-     {
+    public function Admin()
+    {
         // get the Cruise
         $cruises = $this->cruiseModel->getCruises();
 
@@ -42,14 +41,15 @@ class cruiseController extends Controller
         if ($cruises) {
             $data = [
                 'cruises' => $cruises
-                    ];
-                    echo json_encode($cruises);
+            ];
+            echo json_encode($cruises);
         } else {
-            echo('cruise not found');
+            echo ('cruise not found');
         }
     }
 
-    public function delete_cruise($id){
+    public function delete_cruise($id)
+    {
         $this->cruiseModel->deletecruise($id);
         return $this->Admin();
     }
@@ -60,164 +60,140 @@ class cruiseController extends Controller
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $data = json_decode(file_get_contents("php://input"));
-            
-        $data = [
 
-            'name' => $data->name,
-            'ship' => $data->ship,
-            'price'=> $data->price,
-            'picture'=> $data->picture,
-            'nights' => $data->nights,
-            'ports' => $data->ports,
-            'Date' => $data->Date,
-            'trajet' => $data->trajet,
-        ];
+            $data = [
 
-            $this->cruiseModel->insertCruise($data  );
-            
-        
+                'name' => $data->name,
+                'price' => $data->price,
+                'picture' => $data->picture,
+                'nights' => $data->nights,
+                'ship' => $data->ship,
+                'ports' => $data->ports,
+                
+            ];
+
+            $this->cruiseModel->insertCruise($data);
+
+
             echo json_encode($data);
-            
-        }else{
-            echo('cruise not found');
+        } else {
+            echo ('cruise not found');
         }
-        
     }
 
 
-    function gettrajet(){
-        $id_cruise=$_POST['id_cruise'];
-        $trajet=$this->cruiseModel->gettrajet($id_cruise);
-        echo json_encode($trajet); 
+    function gettrajet()
+    {
+        $id_cruise = $_POST['id_cruise'];
+        $trajet = $this->cruiseModel->gettrajet($id_cruise);
+        echo json_encode($trajet);
     }
 
 
-    public function booking(                )
+    public function booking()
     {
         $cards = $this->cruiseModel->getCruises();
-       
+
         // $ports = $this->portModel->getport();
-            $navires = $this->shipModel->getship();
-        // $data=[
-        //     'cards'=>$cards,
-           
-        //     // 'ports' => $ports,
-        //             'navires' => $navires
-        // ];
+        $navires = $this->shipModel->getship();
 
-        // $this->view('booking',$data);
 
-        echo json_encode( $cards);
+        echo json_encode($cards);
     }
 
 
     public function reservation()
     {
-        if(isset($_POST['submit'])){
-
-    
-        $ID_cruise = (int)$_POST['id_cruise'];
-       
-
-        $Price = (float)$_POST['Price'];
-        
-        $Price = $_POST['date'];
-
-        // $trajet = $_POST['trajet'];
+        if (isset($_POST['submit'])) {
 
 
-
-        $port = $_POST['port'];
-
-
-      
+            $ID_cruise = (int)$_POST['id_cruise'];
 
 
+            $Price = (float)$_POST['Price'];
 
-        $id_roomType_price = $_POST['id_roomType_price'];
-        $roomTypeArray = explode(' ',$id_roomType_price);
+            $Price = $_POST['date'];
 
-        $id_type_room=(int)$roomTypeArray[0];
-        $price_room=(float)$roomTypeArray[1];
+            // $trajet = $_POST['trajet'];
 
-        $price_reservation = (float)$Price+(float)$price_room;
-        
-        $this->roomModel->insertRoomTypes($id_type_room);
-        $room = $this->roomModel->getRoom($id_type_room);
-        $id_Room = $room->id;
+            $port = $_POST['port'];
 
-        $ID_user = $_SESSION['Id'];
-      
+            $id_roomType_price = $_POST['id_roomType_price'];
+            $roomTypeArray = explode(' ', $id_roomType_price);
 
-        $this->reservationModel->insertReservation($ID_user ,$port,$price_reservation ,$id_Room,$ID_cruise); 
+            $id_type_room = (int)$roomTypeArray[0];
+            $price_room = (float)$roomTypeArray[1];
 
-        
-        $this->book_now($ID_cruise);
-        }else{
+            $price_reservation = (float)$Price + (float)$price_room;
+
+            $this->roomModel->insertRoomTypes($id_type_room);
+            $room = $this->roomModel->getRoom($id_type_room);
+            $id_Room = $room->id;
+
+            $ID_user = $_SESSION['Id'];
+
+
+            $this->reservationModel->insertReservation($ID_user, $port, $price_reservation, $id_Room, $ID_cruise);
+
+
+            $this->book_now($ID_cruise);
+        } else {
             $this->view('booking');
         }
     }
 
     public function ticket()
     {
-       
+
         $ID_user = $_SESSION['Id'];
-    
+
         $reservation = $this->reservationModel->getreservationByUserID($ID_user);
-  
-        
-        
-        $data=[
-          
-            'reservations'=>$reservation
+
+
+
+        $data = [
+
+            'reservations' => $reservation
         ];
-        
-    
-        $this->view('ticket',$data);
-        
+
+
+        $this->view('ticket', $data);
     }
 
     public function book_now($id)
-    {  
-            $ID_user = $_SESSION['Id'];
+    {
+        $ID_user = $_SESSION['Id'];
 
-            $reservation = $this->reservationModel->getreservationByUserID($ID_user);
+        $reservation = $this->reservationModel->getreservationByUserID($ID_user);
 
-            // $cruise = $this->cruiseModel->getCruise($id);
-                  
-            $data=[
-                // 'cruise'=> $cruise,
-                'reservations' => $reservation
-                
-            ];
-            
-            $this->view('ticket',$data);
+        // $cruise = $this->cruiseModel->getCruise($id);
 
-        
+        $data = [
+            // 'cruise'=> $cruise,
+            'reservations' => $reservation
+
+        ];
+
+        $this->view('ticket', $data);
     }
 
 
     public function order()
     {
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $id = json_decode(file_get_contents("php://input"));
-            // echo json_encode($id->id);
-            // die;
 
-            $cruise = $this->cruiseModel->getCruise($id->id);
             $room_type = $this->type_roomModel->getRoomTypes();
             $port = $this->portModel->getports();
-            $trajet = $this->cruiseModel->gettrajet($id->id);
+            $cruise = $this->cruiseModel->getCruise($id->id);
+
             $data = [
-                'cruise'=>$cruise,
-                'roomType'=> $room_type,
-                'trajet'=>$trajet,
-                'ports'=>$port
+                'cruise' => $cruise,
+                'roomType' => $room_type,
+                'ports' => $port
             ];
-         
-            // $this->view('book_now',$data);
+
             echo json_encode($data);
-            die;
         }
     }
 
@@ -225,7 +201,7 @@ class cruiseController extends Controller
 
     public function insertAllinfo()
     {
-        
+
         $room = $_POST['id_roomType_price'];
         $roomTypeArray = explode(" ", $room);
         $id_roomType = $roomTypeArray[0];
@@ -234,21 +210,21 @@ class cruiseController extends Controller
         $totalPrice = (float)$_POST["Price"] + (float)$priceRoomType;
         $id_cruise = $_POST["id_cruise"];
         $id_user =  1;
-        $this->reservationModel->insertReservation($id_user,$bookingDate,$totalPrice,$id_roomType, $id_cruise);
-        
+        $this->reservationModel->insertReservation($id_user, $bookingDate, $totalPrice, $id_roomType, $id_cruise);
+
         $this->view('home');
-        }
+    }
 
 
-        public function getPort()
-{
-    $port = $this->portModel->getport();
-    $data=[
-        'port'=>$port
-    ];
-    $this->view('booking',$data);
-}
-    
+    public function getPort()
+    {
+        $port = $this->portModel->getport();
+        $data = [
+            'port' => $port
+        ];
+        $this->view('booking', $data);
+    }
+
 
 
     public function delete_ticket($id)
@@ -261,7 +237,7 @@ class cruiseController extends Controller
         // echo '</pre>';
         // exit;
 
-        
+
         $date = $reservation->date_reservation;
         $dateArray = explode('-', $date);
         $year = $dateArray[0];
@@ -277,20 +253,18 @@ class cruiseController extends Controller
         $current_month = date('m');
         $current_day = date('d');
 
-        
-        if($year === $current_year && $month >= $current_month && ($day - $current_day) > 2) {
-            $this->bookingModel->deleteBooking($id);
 
-        } 
-        elseif($year == $current_year && $month > $current_month) {
+        if ($year === $current_year && $month >= $current_month && ($day - $current_day) > 2) {
             $this->bookingModel->deleteBooking($id);
-        }elseif($year > $current_year) {
+        } elseif ($year == $current_year && $month > $current_month) {
             $this->bookingModel->deleteBooking($id);
-        }else{
+        } elseif ($year > $current_year) {
+            $this->bookingModel->deleteBooking($id);
+        } else {
             echo 'You can not delete reservation';
             redirectTime('cruiseController/ticket');
             exit;
-        } 
+        }
         redirect('cruiseController/ticket');
     }
 
@@ -305,21 +279,21 @@ class cruiseController extends Controller
             $date = $_POST['date'];
 
             if ($ship != 0) {
-                $sqlNav = 'ship ='.$ship;
-            }else{
+                $sqlNav = 'ship =' . $ship;
+            } else {
                 $sqlNav = '';
             }
 
-            
+
             if ($portDe != 0) {
-                $sqlportDe = 'start_port ='.$portDe;
-            }else{
+                $sqlportDe = 'start_port =' . $portDe;
+            } else {
                 $sqlportDe = '';
             }
 
             if ($date != '' && !empty($date)) {
-                $sqldate = 'MONTH(start_date) ="'.$date.'"';
-            }else{
+                $sqldate = 'MONTH(start_date) ="' . $date . '"';
+            } else {
                 $sqldate = '';
             }
 
@@ -329,23 +303,23 @@ class cruiseController extends Controller
                 '2' => $sqldate
             ];
             $sqlArrayNotEmpty = [];
-            for ($i=0; $i < count($sqlArray); $i++) {
+            for ($i = 0; $i < count($sqlArray); $i++) {
                 if ($sqlArray[$i] != '') {
                     array_push($sqlArrayNotEmpty, $sqlArray[$i]);
                 }
             }
 
             $sql = '';
-            if ( count($sqlArrayNotEmpty) == 0 ) {
+            if (count($sqlArrayNotEmpty) == 0) {
                 $sql = '';
             }
-            if ( count($sqlArrayNotEmpty) == 1 ) {
-                $sql = ' WHERE '.$sqlArrayNotEmpty[0];
+            if (count($sqlArrayNotEmpty) == 1) {
+                $sql = ' WHERE ' . $sqlArrayNotEmpty[0];
             }
-            if ( count($sqlArrayNotEmpty) == 2 ) {
+            if (count($sqlArrayNotEmpty) == 2) {
                 $sql = ' WHERE ' . $sqlArrayNotEmpty[0] . ' AND ' . $sqlArrayNotEmpty[1];
             }
-            if ( count($sqlArrayNotEmpty) == 3 ) {
+            if (count($sqlArrayNotEmpty) == 3) {
                 $sql = ' WHERE ' . $sqlArrayNotEmpty[0] . ' AND ' . $sqlArrayNotEmpty[1] . ' AND ' . $sqlArrayNotEmpty[2];
             }
             $cruises = $this->cruiseModel->search($sql);
@@ -383,11 +357,5 @@ class cruiseController extends Controller
                 require_once "include/footer.php";
             }
         }
-
     }
 }
-
-
-?>
-
-

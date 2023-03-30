@@ -159,9 +159,8 @@
        const cruises = ref([]);
  
        const fetchData = async () => {
-          const response = await axios.post('http://localhost/Fill_Rouge/backend/cruiseController/getCruise',
-             { 'id': 2 });
-          cruises.value = response.data;
+          const response = await axios.get('/api/cruise');
+          cruises.value = response.data.data;
        };
  
  

@@ -18,17 +18,8 @@
       </option>
     </select>
 
-    <label for="trajet">trajet</label>
-
-    <select name="trajet" v-model="reservationData.trajet" required>
-      <option disabled value="">trajet</option>
-      <option v-for="escale in data.trajet" :value="escale">
-        {{ escale }}
-      </option>
-    </select>
-
+ 
     <label for="port">Port 1</label>
-
     <select name="port" v-model="reservationData.port">
       <option disabled value="">ports</option>
       <option v-for="port in data.ports" :value="port.id">
@@ -80,19 +71,27 @@ import axios from 'axios';
 export default {
    setup() {
       const order = ref([]);
+      const data = ref([]);
 
-      const fetchData = async () => {
-         const response = await axios.post('http://localhost/Fill_Rouge/backend/cruiseController/order',{'id': 118});
-         order.value = response.data;
+      const reserveCruise = async () => {
+         const response = await axios.get('http://localhost/Fill_Rouge/backend/cruiseController/order',{'id':121});
+         console.log(order.value);
+         order = response.data;
       };
 
 
       onMounted(() => {
-         fetchData();
-         console.log(response);
+        reserveCruise();
+         console.log(order.value);
       });
 
-      return { order };
+      const reservationData = ref({
+        id_roomType_price: "",
+        trajet: "",
+        port: "",
+      });
+
+      return { order ,reservationData ,data};
 
    },
 };

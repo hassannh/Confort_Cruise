@@ -4,6 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 
 
+
 <template>
     <div class="bg-black  ">
 
@@ -19,15 +20,17 @@ import { RouterLink, RouterView } from 'vue-router'
                         <div class="nav-link scrollto">About</div>
                     </RouterLink>
                 </li>
-                <li>
+
+                <li v-if="auth && auth.user.role === 2">
                     <RouterLink to="/dashboard"><a class="nav-link scrollto">Admin</a></RouterLink>
                 </li>
+                
                 <li>
                     <RouterLink to="/Booking"><a class="nav-link scrollto ">booking</a></RouterLink>
                 </li>
                 <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">Drop Down 1</a></li>
+                        <li><a href="#">Tickets</a></li>
                         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">Deep Drop Down 1</a></li>
@@ -37,16 +40,12 @@ import { RouterLink, RouterView } from 'vue-router'
                                 <li><a href="#">Deep Drop Down 5</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Drop Down 2</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 <i class="bi bi-list mobile-nav-toggle"></i>
                 <RouterLink to="/register">
-                    <a class="get-started-btn sign" style="width: 120px;
-                                                    padding: 7px;">Get Started</a>
+                    <a class="get-started-btn sign" style="width: 120px; padding: 7px;">Get Started</a>
                 </RouterLink>
             </ul>
         </nav><!-- .navbar -->

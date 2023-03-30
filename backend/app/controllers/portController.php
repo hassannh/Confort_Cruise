@@ -21,7 +21,6 @@ public function getPort()
     $data=[
         'port'=>$port
     ];
-    // $this->view('booking',$data);
     echo json_encode($data);
 }
 

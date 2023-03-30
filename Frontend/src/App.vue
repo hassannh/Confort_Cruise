@@ -8,15 +8,10 @@ import TheFooter from './components/TheFooter.vue'
 <template>
 
 <TheNavbar />
-
-
-
-
-
-
 <TheFooter />
 
 </template>
 
-
+<script>
+</script>
 

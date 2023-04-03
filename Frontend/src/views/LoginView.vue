@@ -50,12 +50,12 @@ export default {
  
     async Submit() {
 
-      
       await this.getToken();
       try {
-        await axios.post('/login', JSON.stringify(this.form));
+        await axios.post('/login', this.form);
         // Save the token to local storage
-        localStorage.setItem('token', response.data.token);
+        // localStorage.setItem('token', response.data.token);
+  
         console.log(response.data.token);
         this.$router.push({ path: "/" });
 

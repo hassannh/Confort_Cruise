@@ -11,7 +11,7 @@
           <input
             type="text"
             v-model="formData.name"
-            id="name"
+            name="name"
             class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
             placeholder="Cruise name"
             required
@@ -32,9 +32,7 @@
           />
         </div>
         <div>
-          <label
-            for="date"
-            class="text-sm text-gray-700 block mb-1 font-medium"
+          <label for="date" class="text-sm text-gray-700 block mb-1 font-medium"
             >Date</label
           >
           <input
@@ -86,7 +84,11 @@
           >
             <option value="" disabled selected>select ship</option>
 
-            <option v-for="elem in shipData" :key="elem.id">
+            <option
+              v-for="elem in shipData"
+              :key="elem.id"
+              v-bind:value="elem.id"
+            >
               {{ elem.name }}
             </option>
           </select>
@@ -133,8 +135,8 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 
-let portData = ref([]);
-let shipData = ref([]);
+const portData = ref([]);
+const shipData = ref([]);
 
 onMounted(() => {
   fetchport();
@@ -144,29 +146,47 @@ onMounted(() => {
 let formData = ref({
   name: "",
   price: "",
+  start_date: "",
   picture: "",
-  nights: "",
+  nights_number: "",
   ship_id: "",
   port_id: "",
-  start_date:"",
 });
-const Submit = async () => {
-  const data = new FormData();
-  // copy formData into data
-  Object.keys(formData.value).forEach((key) => {
-    data.append(key, formData.value[key]);
-  });
-  try {
-    await axios.post("/api/addCruise", data);
 
-    // .then(res => {
-    //   localStorage.setItem("id_user", JSON.stringify( res.data.user.id ));
-    // })
+// const Submit = async (formData) => {
+//   const data = new FormData();
+//   data.append("name", formData.value.name);
+//   data.append("price", formData.value.price);
+//   data.append("picture", formData.value.picture);
+//   data.append("nights_number", formData.value.nights_number);
+//   data.append("ship_id", formData.value.ship_id);
+//   data.append("port_id", formData.value.port_id);
+//   data.append("start_date", formData.value.start_date);
 
-    this.$router.push({ path: "/dashboard" });
-  } catch (error) {
-    console.error(error);
-  }
+//   dd(formData);
+
+//   await axios
+//     .post("/api/addCruise", data)
+
+//     .then((response) => {
+//       console.log(response.data);
+//       this.$router.push({ path: "/dashboard" });
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// };
+
+const Submit = async (formData) => {
+ await axios
+    .post("/api/addCruise", formData.value)
+    .then((response) => {
+      console.log(response.data);
+      this.$router.push({ path: "/dashboard" });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 // ///////////////////////////////////////////////////////////
@@ -184,11 +204,10 @@ const fetchport = async () => {
 // ///////////////////////////////////////////////////////////////
 
 const fetchship = async () => {
-  // console.log(shipData.value);
   await axios
-    .get("/api/getShip")
+    .get("/api/getShipADD")
     .then((result) => {
-      shipData.value = result.data.ship;
+      shipData.value = result.data.Ship;
     })
     .catch((err) => console.log(err));
 };

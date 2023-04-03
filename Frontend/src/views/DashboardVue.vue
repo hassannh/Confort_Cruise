@@ -80,7 +80,7 @@
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white"
                   >
-                    {{ cruise.port_id }}
+                  {{ cruise.port_name }}
                   </td>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -122,7 +122,7 @@ import axios from "axios";
 const cruises = ref([]);
 const fetchData = async () => {
   const response = await axios.get("/api/Admin");
-  cruises.value = response.data.cruises.data;
+  cruises.value = response.data.cruises;
   console.log(response.data);
 };
 

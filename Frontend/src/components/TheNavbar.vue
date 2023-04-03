@@ -29,7 +29,9 @@ import { RouterLink, RouterView } from "vue-router";
             <span>Drop Down</span> <i class="bi bi-chevron-down"></i>
           </a>
           <ul>
-            <li><a href="#">Tickets</a></li>
+            <RouterLink to="/tickets">
+              <li><a href="#">Tickets</a></li>
+            </RouterLink>
             <li class="dropdown">
               <a href="#">
                 <span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i>

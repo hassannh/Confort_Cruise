@@ -10,6 +10,7 @@ import companyAdmin from '../views/companyAdmin.vue'
 import BookingView from '../views/BookingView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AddCruise from '../components/AddCruise.vue'
+import Tickets from '../components/Tickets.vue'
 
 
 const router = createRouter({
@@ -39,6 +40,11 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardVue
+    },
+    {
+      path: '/tickets',
+      name: 'tickets',
+      component: Tickets
     },
     {
       path: '/add_cruise',

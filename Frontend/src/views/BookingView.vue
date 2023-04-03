@@ -81,6 +81,8 @@
                       Featured
                    </span>
                 </div>
+
+                
  
                 <div class="mt-4">
                    <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
@@ -119,8 +121,8 @@
  
                 <div class="grid grid-cols-2 mt-8">
                    <div class="flex items-center">
-                      <RouterLink :data="data" to="/reservation">
-                         <div
+                      <RouterLink to="/reservation/7">
+                         <div 
                             class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">
                             Book Now
                          </div>
@@ -149,13 +151,12 @@
  
  
  
- <script>
+ <script setup >
  
  import { ref, onMounted } from 'vue';
  import axios from 'axios';
  
- export default {
-    setup() {
+ 
        const cruises = ref([]);
  
        const fetchData = async () => {
@@ -168,9 +169,6 @@
           fetchData();
        });
  
-       return { cruises };
- 
-    },
- };
+  
  </script>
  

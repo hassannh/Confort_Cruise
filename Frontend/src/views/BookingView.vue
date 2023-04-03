@@ -121,7 +121,7 @@
  
                 <div class="grid grid-cols-2 mt-8">
                    <div class="flex items-center">
-                      <RouterLink to="/reservation/7">
+                      <RouterLink to="/reservation">
                          <div 
                             class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">
                             Book Now
@@ -141,30 +141,89 @@
              </div>
           </a>
        </div>
- 
- 
- 
     </div>
+
+    <div>
+    <ul>
+      <li v-for="cruise in paginatedCruises" :key="cruise.id">
+        {{ cruise.name }}
+      </li>
+    </ul>
+    <VuePagination :currentPage.sync="currentPage" :perPage.sync="perPage" :total="total" @page-changed="handlePageChanged" />
+  </div>
+
+
+
+
+
+    <h1 class="flex justify-center text-3xl">Companies</h1>
+
+<div class="flex justify-center justify-around mt-5">
+  <div class="w-20 h-20 rounded-full">
+    <img src="../../public/pictures/C-logo.jpeg" alt="" />
+  </div>
+  <div class="w-20 h-20 rounded-full">
+    <img src="../../public/pictures/th (1).jpeg" alt="" />
+  </div>
+  <div class="w-20 h-20 rounded-full">
+    <img src="../../public/pictures/th (2).jpeg" alt="" />
+  </div>
+  <div class="w-20 h-20 rounded-full">
+    <img src="../../public/pictures/th (3).jpeg" alt="" />
+  </div>
+  <div class="w-20 h-20 rounded-full">
+    <img src="../../public/pictures/th (4).jpeg" alt="" />
+  </div>
+</div>
+
  </template>
  
  
- 
+ <!-- <script setup>
+import VuePagination from 'vue-pagination';
+import { ref, onMounted, computed } from 'vue';
+import axios from 'axios';
+const cruises = ref([]);
+const currentPage = ref(1);
+const perPage = ref(10);
+const total = ref(100);
+
+const paginatedCruises = computed(() => {
+  const startIndex = (currentPage.value - 1) * perPage.value;
+  const endIndex = startIndex + perPage.value;
+  return cruises.value.slice(startIndex, endIndex);
+});
+
+async function fetchData() {
+  const response = await axios.get('/api/cruise');
+  cruises.value = response.data.data;
+  total.value = response.data.total;
+}
+
+function handlePageChanged(newPage) {
+  currentPage.value = newPage;
+}
+
+onMounted(() => {
+  fetchData();
+});
+</script> -->
  
  
  <script setup >
  
  import { ref, onMounted } from 'vue';
  import axios from 'axios';
+//  import VuePagination from 'vue-pagination'
  
- 
-       const cruises = ref([]);
- 
-       const fetchData = async () => {
-          const response = await axios.get('/api/cruise');
-          cruises.value = response.data.data;
-       };
- 
- 
+ const cruises = ref([]);
+
+
+    const fetchData = async () => {
+       const response = await axios.get('/api/cruise');
+       cruises.value = response.data.data;
+    };
+
        onMounted(() => {
           fetchData();
        });

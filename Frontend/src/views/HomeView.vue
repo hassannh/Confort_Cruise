@@ -151,7 +151,7 @@
  
                 <div class="grid grid-cols-2 mt-8">
                    <div class="flex items-center">
-                      <RouterLink :data="data" to="/reservation">
+                     <RouterLink to="/reservation">
                          <div
                             class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">
                             Book Now
@@ -171,16 +171,36 @@
              </div>
           </a>
        </div>
- 
- 
- 
     </div>
+
+
+
+    <h1 class="flex justify-center text-3xl">Companies</h1>
+
+  <div class="flex justify-center justify-around mt-5">
+    <div class="w-20 h-20 rounded-full">
+      <img src="../../public/pictures/C-logo.jpeg" alt="" />
+    </div>
+    <div class="w-20 h-20 rounded-full">
+      <img src="../../public/pictures/th (1).jpeg" alt="" />
+    </div>
+    <div class="w-20 h-20 rounded-full">
+      <img src="../../public/pictures/th (2).jpeg" alt="" />
+    </div>
+    <div class="w-20 h-20 rounded-full">
+      <img src="../../public/pictures/th (3).jpeg" alt="" />
+    </div>
+    <div class="w-20 h-20 rounded-full">
+      <img src="../../public/pictures/th (4).jpeg" alt="" />
+    </div>
+  </div>
 </template>
 
 <script>
 
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import VuePagination from 'vue-pagination'
 
 export default {
    setup() {

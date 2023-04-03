@@ -90,6 +90,7 @@
 
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import VuePagination from 'vue-pagination'
 
 export default {
     setup() {

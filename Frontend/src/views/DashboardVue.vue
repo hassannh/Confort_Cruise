@@ -118,6 +118,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import VuePagination from 'vue-pagination'
 
 const cruises = ref([]);
 const fetchData = async () => {

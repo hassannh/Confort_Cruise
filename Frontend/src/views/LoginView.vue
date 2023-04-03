@@ -2,8 +2,7 @@
 
 
 
-<form class="w-[50%] justify-center mx-8 my-8" @submit.prevent="Submit">
-  
+<form class="w-[50%] justify-center mx-8 my-8" @submit.prevent="authStore.login(form)">
   <div class="mb-6">
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">Your email</label>
     <input type="email" v-model="form.email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="email@test.com" required>
@@ -32,38 +31,19 @@
 
 
 
-<script>
-import axios from 'axios'
-export default {
-  data() {
-    return {
-      form: {
+<script setup>
+
+
+import { ref } from 'vue';
+import { useAuthStore } from '../stores';
+
+const authStore = useAuthStore()
+
+
+const form = ref({
         email: '',
         password: ''
-      },
-    }
-  },
-  methods: {
-    async getToken (){
-      await axios.get('/sanctum/csrf-cookie');
-    },
- 
-    async Submit() {
+});
 
-      await this.getToken();
-      try {
-        await axios.post('/login', this.form);
-        // Save the token to local storage
-        // localStorage.setItem('token', response.data.token);
-  
-        console.log(response.data.token);
-        this.$router.push({ path: "/" });
 
-      } catch (error) {
-        console.error(error)
-      }
-    },
-  
-}
-}
 </script>

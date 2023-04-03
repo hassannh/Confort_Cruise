@@ -110,6 +110,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import VuePagination from 'vue-pagination'
 
     const ships = ref([]);
 

@@ -1,26 +1,66 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import { useAuthStore } from "../stores";
+
+function logout() {
+  const authStore = useAuthStore();
+  if (authStore) {
+    authStore.logout();
+  } else {
+    console.error("Authentication store not found");
+  }
+}
+
+let user = null;
+const authStore = useAuthStore();
+if (authStore) {
+  user = authStore.user;
+  if (user && typeof user.role === "number") {
+    // User has role 0, do something here
+  }
+} else {
+  console.error("Authentication store not found");
+}
+
+function toggleMobileNav() {
+    const navbar = document.querySelector("#nav-2");
+    if (navbar.style.display === "block") {
+      navbar.setAttribute("style", "display:none");
+    } else {
+      navbar.setAttribute("style", "display:block");
+    }
+  }
+  
 </script>
 
 <template>
+  <div class="bg-black sm:block sm:h-50 hidden lg:none">
+    <!-- bg-black sm:h-50 block sm:hidden lg:block -->
+    <i
+      class="bi bi-list mobile-nav-toggle float-right my-3 mx-3"
+      @click="toggleMobileNav"
+    >
+      <li style="list-style-type: none">
+        <img src="../../public/pictures/togle.svg" alt="toggle" /></li
+    ></i>
 
-  <div class="bg-black" style="height: 50px;" >
-    <i class="bi bi-list mobile-nav-toggle float-right my-3 mx-3" @click="toggleMobileNav">
-      <li style="list-style-type: none;"><img src="../../public/pictures/togle.svg" alt="toggle"></li></i>
-      
-      <li class="float-left my-3 mx-3" style="list-style-type: none;">
-        <RouterLink class="border border-yellow-500 border-2 py-1 px-2" style="display: none;" to="/register">
-          <!-- <div class="get-started-btn absolute p-0 h-fit" > -->
-            <button class="relative m-0 p-0"
-            >Get Started</button
-            >
-          <!-- </div> -->
-        </RouterLink>
-      </li>
+    <li
+      class="hidden lg:block float-left my-3 mx-3"
+      style="list-style-type: none"
+    >
+      <RouterLink
+        class="border border-yellow-500 border-2 py-1 px-2"
+        style="display: none"
+        to="/register"
+      >
+        <!-- <div class="get-started-btn absolute p-0 h-fit" > -->
+        <button class="relative m-0 p-0">Get Started</button>
+        <!-- </div> -->
+      </RouterLink>
+    </li>
   </div>
-    
-    <div class="bg-black">
-    
+
+  <div class="bg-black">
     <nav class="navbar-2" id="nav-2">
       <ul>
         <RouterLink to="/">
@@ -42,18 +82,13 @@ import { RouterLink, RouterView } from "vue-router";
           </RouterLink>
         </li>
         <li class="dropdown flex justify-center mt-3">
-          <ul>
-            <RouterLink to="/tickets">
-              <li><a href="#">Tickets</a></li>
-            </RouterLink>
-          </ul>
+          <RouterLink to="/tickets">
+            <li><a href="#">Tickets</a></li>
+          </RouterLink>
         </li>
         <li><a class="flex justify-center mt-3" href="#contact">Contact</a></li>
-    </ul>
-</nav>
-
-
-
+      </ul>
+    </nav>
 
     <nav class="navbar">
       <ul>
@@ -65,7 +100,12 @@ import { RouterLink, RouterView } from "vue-router";
             <div class="nav-link scrollto">About</div>
           </RouterLink>
         </li>
-        <li>
+        <li
+          v-if="
+            authStore.user &&
+            (authStore.user.role === 1 || authStore.user.role === 2)
+          "
+        >
           <RouterLink to="/dashboard">
             <a class="nav-link scrollto">Admin</a>
           </RouterLink>
@@ -75,7 +115,13 @@ import { RouterLink, RouterView } from "vue-router";
             <a class="nav-link scrollto">booking</a>
           </RouterLink>
         </li>
-        <li class="dropdown">
+        <li
+          class="dropdown"
+          v-if="
+            authStore.user &&
+            (authStore.user.role === 1 || authStore.user.role === 2)
+          "
+        >
           <a href="#">
             <span>Drop Down</span> <i class="bi bi-chevron-down"></i>
           </a>
@@ -98,35 +144,28 @@ import { RouterLink, RouterView } from "vue-router";
           </ul>
         </li>
         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        <li>
+        <li v-if="authStore.user">
+          <button
+            @click="logout"
+            class="get-started-btn sign"
+            style="width: 120px; padding: 7px"
+          >
+            Logout
+          </button>
+        </li>
+        <li v-else="!authStore.user">
           <RouterLink to="/register">
             <a class="get-started-btn sign" style="width: 120px; padding: 7px"
               >Get Started</a
             >
           </RouterLink>
         </li>
-    </ul>
-</nav> 
-    
+      </ul>
+    </nav>
   </div>
   <RouterView />
 </template>
 
-<script>
-export default {
-  methods: {
-    toggleMobileNav() {
-      const navbar = document.querySelector('#nav-2')
-      if (navbar.style.display === "block") {
-        navbar.setAttribute("style","display:none")
-      } else {
-        navbar.setAttribute("style","display:block")
-      }
-      
-    }
-  }
-}
-</script>
 
 <style>
 .backgraund {
@@ -137,13 +176,12 @@ export default {
   height: 500px;
 }
 
-.navbar-2{
+.navbar-2 {
   display: none;
 }
 
 .mobile-nav-toggle {
   display: none;
-  
 }
 
 @media (max-width: 500px) {

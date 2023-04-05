@@ -28,11 +28,11 @@
         </h3>
         <p class="md:text-lg text-gray-500 text-base">
           ¤ Room : {{ ticket.room_id }}<br />¤ start date :
-          {{ ticket.cruise_start_date }} <br />¤ trajet :
+          {{ ticket.cruise_start_date }}
         </p>
         <p class="text-xl font-black text-gray-800">
           price
-          {{ ticket.price }} <br />
+          {{ ticket.price }}$ <br />
           <span class="font-normal text-gray-600 text-base"
             >{{ ticket.nights_number }} nights</span
           >

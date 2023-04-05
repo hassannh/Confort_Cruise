@@ -50,23 +50,23 @@
         <!-- Form -->
         <form class="mt-4" @submit.prevent="submitReservation" method="POST">
 
-          <input v-model="formData.user_id" type="hidden" name="user_id">
+          <input v-model="formData.user_id" type="hidden" name="user_id" >
           <input v-model="formData.cruise_id" type="hidden" name="cruise_id">
           <input v-model="formData.price" type="hidden" name="price">
           <div class="mb-3">
             <label class="mb-2 block text-xs font-semibold">Select Room Type</label>
-            <select v-model="formData.room_id" class="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500" name="" id="">
+            <select v-model="formData.room_id" class="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500" name="room_id">
               <option value="" disabled>roomType</option>
-              <option v-for="element in roomData" :key="element.id" value="">{{ element.room_name +' '+ element.room_price }}$</option>
+              <option v-for="element in roomData" :key="element.id">{{ element.room_name +' '+ element.room_price }}$</option>
             </select>
           </div>
 
           <div class="mb-3">
             
             <label class="mb-2 block text-xs font-semibold">Select Parkin Place Number</label>
-            <select v-model="formData.parking_id" class="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500" name="" id="">
+            <select v-model="formData.parking_id" class="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500" name="parking_id">
               <option disabled value="">place N:</option>
-              <option v-for="ele in parkingData" :key="ele.id" value="">{{ ele.place_number }}</option>
+              <option v-for="ele in parkingData" :key="ele.id">{{ ele.place_number }}</option>
             </select>
           </div>
 
@@ -126,9 +126,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from 'axios';
+import { useAuthStore } from '../stores';
+
+const authstore = useAuthStore();
 
 const roomData = ref([]);
 const parkingData = ref([]);
+
+
 
 onMounted(() => {
   Parking_place();
@@ -136,20 +141,16 @@ onMounted(() => {
 });
 
 let formData = ref( {
-  user_id: '',
+  user_id: authstore.user.id,
   cruise_id: '',
   room_id: '',
   parking_id: '',
   price: ''
 });
 
-
-
-
-
 const submitReservation = async (formData) => {
     
-  await axios.post("/api/addCruise", formData.value)
+  await axios.post("api/addReservation" , [formData] )
         .then(response => {
           console.log(response.data);
         })
@@ -181,9 +182,5 @@ const submitReservation = async (formData) => {
     })
     .catch((err) => console.log(err));
 };
-
-
-
-  
 
 </script>

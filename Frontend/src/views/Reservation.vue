@@ -43,7 +43,10 @@
           </div>
 
           <div class="mb-3">
-            <button class="mb-1.5 block w-full text-center text-white bg-purple-700 hover:bg-purple-900 px-2 py-1.5 rounded-md">BOOK NOW</button>
+      
+              <button class="mb-1.5 block w-full text-center text-white bg-purple-700 hover:bg-purple-900 px-2 py-1.5 rounded-md">BOOK NOW</button>
+
+          
            
           </div>
         </form>
@@ -116,19 +119,10 @@ var formData = ref( {
   cruise_id: '',
   room_id: '',
   parking_id: '',
-  price: ''
+  price: '260'
 });
 
-// const submitReservation = async (formData) => {
-    
-//   await axios.post("api/addReservation/" + route.query.id , formData.value )
-//         .then(response => {
-//           console.log(response.data);
-//         })
-//         .catch(error => {
-//           console.error(error);
-//         });
-//     };
+const route = useRoute() ;
 
 const submitReservation = async (formData) => { 
   try {
@@ -143,7 +137,7 @@ const submitReservation = async (formData) => {
 
     // formData.value.room_id = roomId.value;
 
-    const route = useRoute() ;
+    
     const getRoomId = async () => { 
       try {
         const {data} = await axios.get(`/api/getRoom_Id/`+ route.query.id);

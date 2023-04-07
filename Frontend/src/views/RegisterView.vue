@@ -2,7 +2,9 @@
 
     <!-- http://localhost/fill_rouge/backend/app/controllers/usersController/register -->
   
-<form class="w-[30%] justify-center mx-8 my-8" @submit.prevent="authStore.register(form)">
+
+    <div class="flex items-center justify-center h-full">
+<form class="w-[30%] mx-8 my-8" @submit.prevent="authStore.register(form)">
   <div class="mb-6">
     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">Your name</label>
     <input type="text" v-model="form.name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Your name" required>
@@ -30,6 +32,7 @@
       <a class="ml-3">Sign in</a>
   </RouterLink>
 </form>
+</div>
 
 
 
@@ -52,36 +55,4 @@ const form = ref({
       
 })
 
-// export default {
-//   se
-//   data() {
-//     return {
-//       form: {
-//         name: '',
-//         email: '',
-//         password: '',
-//         password_confirmation: ''
-//       },
-//     }
-//   },
-
-//   methods: {
-//     async getToken (){
-//       await axios.get('/sanctum/csrf-cookie');
-//     },
-
-
-//     async handleSubmit() {
-
-//       await this.getToken();
-//       try {
-//         await axios.post('/register', this.form)
-//         this.$router.push({ path: "/login" });
-//       } catch (error) {
-//         console.error(error.response.data)
-//       }
-//     }
-
-//   }
-// }
 </script>

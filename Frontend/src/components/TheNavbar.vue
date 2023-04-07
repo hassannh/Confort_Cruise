@@ -119,7 +119,7 @@ function toggleMobileNav() {
           class="dropdown"
           v-if="
             authStore.user &&
-            (authStore.user.role === 1 || authStore.user.role === 2)
+            (authStore.user.role === 1 || authStore.user.role === 2 || authStore.user.role === 0)
           "
         >
           <a href="#">

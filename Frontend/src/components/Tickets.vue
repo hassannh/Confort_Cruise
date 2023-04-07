@@ -18,7 +18,7 @@
             class="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block"
           >
             <a
-              href="<?=URLROOT . 'cruiseController/delete_ticket/' . $reservation->id_reservation ?>"
+              href=""
               >Cancel</a
             >
           </div>
@@ -45,13 +45,19 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import { useAuthStore } from '../stores';
+import  {useRoute} from 'vue-router'
+
+const authstore = useAuthStore();
+const route = useRoute();
 
 const tickets = ref([]);
 
 let fetchTickets = async () => {
-  const response = await axios.get("api/tickets/7");
+  const response = await axios.get(`api/tickets/${authstore.user.id}`);
   tickets.value = response.data.reservations;
 };
+
 onMounted(() => {
   fetchTickets();
 });

@@ -1,37 +1,5 @@
 
 
-
-<!-- <div class="formReserve ml-6">
-  <form class="ReserveForm" @submit.prevent="reserveCruise" method="POST">
-    <input type="hidden" name="id_cruise" :value="data.cruise.ID_cruise">
-    
-    <label for="Price">cruise price</label>
-    <input type="text" readonly name="Price" :value="data.cruise.price + ' DH'">
-    
-    <label for="id_roomType_price">room type</label>
-    
-    <select name="id_roomType_price" v-model="reservationData.id_roomType_price" required>
-      <option disabled value="">room type</option>
-      <option v-for="roomType in data.roomType" :value="roomType.id + ' ' + roomType.price">
-        {{ roomType.name }}:{{ roomType.price }} $
-      </option>
-    </select>
-
-    
-    <label for="port">Port 1</label>
-    <select name="port" v-model="reservationData.port">
-      <option disabled value="">ports</option>
-      <option v-for="port in data.ports" :value="port.id">
-        {{ port.name }}
-      </option>
-    </select>
-    
-    <div class="reserveSubmit">
-      <button type="submit" class="btn bnt primary">book Now</button>
-    </div>
-  </form>
-</div> -->
-
 <template>
 
 <!-- component -->
@@ -48,16 +16,16 @@
         <small class="text-gray-400">Welcome ! Please Select Your Room Type And Parking Place</small>
 
         <!-- Form -->
-        <form class="mt-4" @submit.prevent="submitReservation" method="POST">
+        <form class="mt-4" @submit.prevent="submitReservation(formData)" method="POST">
 
-          <input v-model="formData.user_id" type="hidden" name="user_id" >
+          <!-- <input v-model="formData.user_id" type="hidden" name="user_id" > -->
           <input v-model="formData.cruise_id" type="hidden" name="cruise_id">
           <input v-model="formData.price" type="hidden" name="price">
           <div class="mb-3">
             <label class="mb-2 block text-xs font-semibold">Select Room Type</label>
             <select v-model="formData.room_id" class="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500" name="room_id">
-              <option value="" disabled>roomType</option>
-              <option v-for="element in roomData" :key="element.id">{{ element.room_name +' '+ element.room_price }}$</option>
+              <option disabled value="">roomType</option>
+              <option v-for="element in roomData" :key="element.id" >{{ element.room_name +' '+ element.room_price }}$</option>
             </select>
           </div>
 
@@ -66,7 +34,7 @@
             <label class="mb-2 block text-xs font-semibold">Select Parkin Place Number</label>
             <select v-model="formData.parking_id" class="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500" name="parking_id">
               <option disabled value="">place N:</option>
-              <option v-for="ele in parkingData" :key="ele.id">{{ ele.place_number }}</option>
+              <option v-for="ele in parkingData" :key="ele.id" :value="ele.id">{{ ele.place_number }}</option>
             </select>
           </div>
 
@@ -127,36 +95,71 @@
 import { ref, onMounted } from "vue";
 import axios from 'axios';
 import { useAuthStore } from '../stores';
+import  {useRoute} from 'vue-router'
 
 const authstore = useAuthStore();
 
 const roomData = ref([]);
 const parkingData = ref([]);
-
+const cruise = ref(null)
+const roomId = ref(null);
 
 
 onMounted(() => {
   Parking_place();
   roomType();
+  // getRoomId();
+  fetch_one_cruise();
 });
 
-let formData = ref( {
-  user_id: authstore.user.id,
+var formData = ref( {
   cruise_id: '',
   room_id: '',
   parking_id: '',
   price: ''
 });
 
-const submitReservation = async (formData) => {
+// const submitReservation = async (formData) => {
     
-  await axios.post("api/addReservation" , [formData] )
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+//   await axios.post("api/addReservation/" + route.query.id , formData.value )
+//         .then(response => {
+//           console.log(response.data);
+//         })
+//         .catch(error => {
+//           console.error(error);
+//         });
+//     };
+
+const submitReservation = async (formData) => { 
+  try {
+    await getRoomId(); // wait for getRoomId to complete
+    // console.log(formData.parking_id +"    Test")
+    const response = await axios.post("api/addReservation/" + route.query.id, formData);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+    // formData.value.room_id = roomId.value;
+
+    const route = useRoute() ;
+    const getRoomId = async () => { 
+      try {
+        const {data} = await axios.get(`/api/getRoom_Id/`+ route.query.id);
+        roomId.value = data;
+        formData.value.room_id = data.roomId;
+        console.log(data.roomId);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    const fetch_one_cruise = async () => {
+       const {data} = await axios.get('/api/show/'+ route.query.id);
+       cruise.value = data;
+        formData.value.cruise_id = data.id;
+        console.log(data.id);
     };
 
 

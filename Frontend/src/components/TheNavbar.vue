@@ -30,7 +30,7 @@ function toggleMobileNav() {
       navbar.setAttribute("style", "display:block");
     }
   }
-  
+
 </script>
 
 <template>

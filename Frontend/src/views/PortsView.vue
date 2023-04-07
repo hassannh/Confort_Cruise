@@ -51,7 +51,14 @@
                   >
                     Port Name
                   </th>
-                  <th scope="col" class="p-4">
+                  <th
+                    scope="col"
+                    class="p-4"
+                  >
+                    control
+                  </th>
+                  <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+>
                     <span class="sr-only">Delete</span>
                   </th>
                 </tr>

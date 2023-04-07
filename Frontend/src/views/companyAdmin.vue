@@ -38,15 +38,15 @@
 
                                     <th scope="col"
                                         class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                        ship ID
+                                        Company ID
                                     </th>
                                     <th scope="col"
                                         class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                        ship Name
+                                        Company Name
                                     </th>
                                     <th scope="col"
                                         class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                        Price
+                                        Controle
                                     </th>
                                     <th scope="col" class="p-4">
                                         <span class="sr-only">Delete</span>

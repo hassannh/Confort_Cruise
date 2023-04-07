@@ -121,7 +121,7 @@
  
                 <div class="grid grid-cols-2 mt-8">
                    <div class="flex items-center">
-                      <RouterLink to="/reservation">
+                      <RouterLink :to="`/reservation?id=${cruise.id}`">
                          <div 
                             class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">
                             Book Now
@@ -214,6 +214,7 @@ onMounted(() => {
  
  import { ref, onMounted } from 'vue';
  import axios from 'axios';
+import { useRoute } from 'vue-router';
 //  import VuePagination from 'vue-pagination'
  
  const cruises = ref([]);
@@ -223,9 +224,11 @@ onMounted(() => {
        const response = await axios.get('/api/cruise');
        cruises.value = response.data.data;
     };
-
+    
+ 
        onMounted(() => {
           fetchData();
+          
        });
  
   

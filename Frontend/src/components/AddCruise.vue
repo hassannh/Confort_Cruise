@@ -150,32 +150,10 @@ let formData = ref({
   picture: "",
   nights_number: "",
   ship_id: "",
-  port_id: "",
+  port_id: ""
 });
 
-// const Submit = async (formData) => {
-//   const data = new FormData();
-//   data.append("name", formData.value.name);
-//   data.append("price", formData.value.price);
-//   data.append("picture", formData.value.picture);
-//   data.append("nights_number", formData.value.nights_number);
-//   data.append("ship_id", formData.value.ship_id);
-//   data.append("port_id", formData.value.port_id);
-//   data.append("start_date", formData.value.start_date);
 
-//   dd(formData);
-
-//   await axios
-//     .post("/api/addCruise", data)
-
-//     .then((response) => {
-//       console.log(response.data);
-//       this.$router.push({ path: "/dashboard" });
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// };
 
 const Submit = async (formData) => {
  await axios

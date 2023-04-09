@@ -1,5 +1,6 @@
 <template>
   <div
+    id="content"
     class="flex flex-col justify-center h-screen ml-16"
     v-for="ticket in tickets"
     :key="ticket.id"
@@ -39,6 +40,7 @@
         </p>
       </div>
     </div>
+    <button @click="download"> Download PDF</button>
   </div>
 </template>
 
@@ -47,6 +49,8 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useAuthStore } from '../stores';
 import  {useRoute} from 'vue-router'
+import jsPDF from 'jspdf';
+// import 'jspdf/dist/jspdf.plugin.from_html.js';
 
 const authstore = useAuthStore();
 const route = useRoute();
@@ -57,6 +61,33 @@ let fetchTickets = async () => {
   const response = await axios.get(`api/tickets/${authstore.user.id}`);
   tickets.value = response.data.reservations;
 };
+
+// let download = () => {
+//   const doc = new jsPDF();
+//   const html = document.getElementById('content');
+//   doc.html(html, 15, 15, {
+//     width: 170
+//   });
+//   doc.save('output.pdf');
+// };
+
+let download = () => {
+  const doc = new jsPDF();
+  const html = document.getElementById('content');
+  doc.html(html, {
+    callback: () => {
+      doc.save('output.pdf');
+    },
+    x: 15,
+    y: 15,
+    html2canvas: {
+      scale: 0.5
+    },
+    margin: [0, 0, 0, 0],
+    useCORS: true
+  });
+};
+
 
 onMounted(() => {
   fetchTickets();

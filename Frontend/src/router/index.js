@@ -11,6 +11,9 @@ import BookingView from '../views/BookingView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AddCruise from '../components/AddCruise.vue'
 import Tickets from '../components/Tickets.vue'
+import Contact from '../components/Contact.vue'
+import AddPort from '../components/AddPort.vue'
+import AddShip from '../components/AddShip.vue'
 
 
 const router = createRouter({
@@ -32,6 +35,16 @@ const router = createRouter({
       component: LoginView
     },
     {
+      path: '/AddPort',
+      name: 'AddPort',
+      component: AddPort
+    },
+    {
+      path: '/AddShip',
+      name: 'AddShip',
+      component: AddShip
+    },
+    {
       path: '/register',
       name: 'register',
       component: RegisterView
@@ -40,6 +53,11 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardVue
+    },
+    {
+      path: '/Contact',
+      name: 'Contact',
+      component: Contact
     },
     {
       path: '/tickets',

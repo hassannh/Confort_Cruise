@@ -1,4 +1,42 @@
 <template>
+<!-- 1 -->
+
+<div class="background">
+    <div>
+      <div
+        class="mt-5"  style="
+                              margin: 0;
+                              font-size: 56px;
+                              font-weight: 700;
+                              line-height: 64px;
+                              color: #fff;
+                              text-align: center;
+                              font-family: sans-serif;
+                            "
+      >
+        <!-- <div class="xl:col-span-6 lg:col-span-8"> -->
+        <h1>
+          Admin Dashboard <br> Managment
+        </h1>
+      </div>
+      <h2
+        style="
+          font-size: 26px;
+          font-weight: 30;
+          line-height: 24px;
+          color: #fff;
+          text-align: center;
+        "
+      >
+      Ports Managment
+      </h2>
+
+      
+    </div>
+  </div>
+
+
+<!-- 2 -->
   <div class="w-3/4 mx-auto mt-6 mb-6">
     <div class="flex flex-col">
       <h1 class="text-6xl font-extrabold tracking-tighter text-center mb-4">
@@ -100,10 +138,12 @@
         </div>
       </div>
     </div>
-
-    <a class="btn btn-sm btn-primary mx-5"
-      ><i class="fa fa-plus"></i> New Port</a
-    >
+    <RouterLink to="/AddPort">
+      <a class="btn btn-sm btn-primary mx-5">
+        <i class="fa fa-plus"></i> 
+        New Port
+      </a>
+    </RouterLink>
   </div>
 </template>
 
@@ -136,3 +176,16 @@ import VuePagination from 'vue-pagination'
     });
 
 </script>
+
+
+
+<style>
+.background {
+  background-image: url("../../public/pictures/ABOUT_backgrouand.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 340px;
+}
+
+</style>

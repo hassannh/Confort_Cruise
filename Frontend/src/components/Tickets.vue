@@ -1,4 +1,41 @@
 <template>
+<!-- 1 -->
+
+<div class="background">
+    <div>
+      <div
+        class="mt-5"  style="
+                              margin: 0;
+                              font-size: 56px;
+                              font-weight: 700;
+                              line-height: 64px;
+                              color: #fff;
+                              text-align: center;
+                              font-family: sans-serif;
+                            "
+      >
+        <!-- <div class="xl:col-span-6 lg:col-span-8"> -->
+        <h1>
+          Booked Tickets Area
+        </h1>
+      </div>
+      <h2
+        style="
+          font-size: 26px;
+          font-weight: 30;
+          line-height: 24px;
+          color: #fff;
+          text-align: center;
+        "
+      >
+      We are team of talented digital marketers
+      </h2>
+
+      
+    </div>
+  </div>
+
+<!-- 2 -->
   <div
     id="content"
     class="flex flex-col justify-center h-screen ml-16"
@@ -18,10 +55,7 @@
           <div
             class="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block"
           >
-            <a
-              href=""
-              >Cancel</a
-            >
+            <a @click="destroy(ticket.id)">Cancel</a>
           </div>
         </div>
         <h3 class="font-black text-gray-800 md:text-3xl text-xl">
@@ -42,6 +76,7 @@
     </div>
     <button @click="download"> Download PDF</button>
   </div>
+  
 </template>
 
 <script setup>
@@ -50,7 +85,6 @@ import axios from "axios";
 import { useAuthStore } from '../stores';
 import  {useRoute} from 'vue-router'
 import jsPDF from 'jspdf';
-// import 'jspdf/dist/jspdf.plugin.from_html.js';
 
 const authstore = useAuthStore();
 const route = useRoute();
@@ -62,14 +96,6 @@ let fetchTickets = async () => {
   tickets.value = response.data.reservations;
 };
 
-// let download = () => {
-//   const doc = new jsPDF();
-//   const html = document.getElementById('content');
-//   doc.html(html, 15, 15, {
-//     width: 170
-//   });
-//   doc.save('output.pdf');
-// };
 
 let download = () => {
   const doc = new jsPDF();
@@ -81,11 +107,18 @@ let download = () => {
     x: 15,
     y: 15,
     html2canvas: {
-      scale: 0.5
+      scale: 0.1
     },
     margin: [0, 0, 0, 0],
     useCORS: true
   });
+};
+
+const destroy = async (id) => {
+  console.log(id);
+  const response = await axios.delete(`/api/destroyReservation/${id}`);
+  tickets.value = response.data.ticket.data;
+  console.log(response.data);
 };
 
 

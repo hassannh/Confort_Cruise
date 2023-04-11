@@ -1,17 +1,16 @@
 <template>
   <div class="backgraund">
-    <div class="">
+    <div>
       <div
-        class="mt-5"
-        style="
-          margin: 0;
-          font-size: 56px;
-          font-weight: 700;
-          line-height: 64px;
-          color: #fff;
-          text-align: center;
-          font-family: sans-serif;
-        "
+        class="mt-5"  style="
+                              margin: 0;
+                              font-size: 56px;
+                              font-weight: 700;
+                              line-height: 64px;
+                              color: #fff;
+                              text-align: center;
+                              font-family: sans-serif;
+                            "
       >
         <!-- <div class="xl:col-span-6 lg:col-span-8"> -->
         <h1>
@@ -50,6 +49,7 @@
               </div>
             </div>
           </div>
+
           <div class="row gy-4 mt-5 justify-content-center">
             <div class="get-started-btn sign">
               <div class="icon-box">
@@ -58,6 +58,7 @@
               </div>
             </div>
           </div>
+
           <div class="row gy-4 mt-5 justify-content-center">
             <div class="get-started-btn sign">
               <div class="icon-box">
@@ -66,6 +67,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </section>
     </div>
@@ -175,6 +177,12 @@
 
 
 
+    <div class="my-5 mx-5 h-50px">
+      <img src="../../public/pictures/cruiseee.avif" alt="">
+    </div>
+
+
+
     <h1 class="flex justify-center text-3xl">Companies</h1>
 
   <div class="flex justify-center justify-around mt-5">
@@ -222,3 +230,15 @@ export default {
    },
 };
 </script>
+
+
+
+<style>
+.backgraund {
+  background-image: url("../../public/pictures/fillrouge_backgrouand.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 500px;
+}
+</style>

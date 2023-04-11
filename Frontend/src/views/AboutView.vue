@@ -1,4 +1,84 @@
 <template>
+
+<!-- 1 -->
+
+
+<div class="background">
+    <div>
+      <div
+        class="mt-5"  style="
+                              margin: 0;
+                              font-size: 56px;
+                              font-weight: 700;
+                              line-height: 64px;
+                              color: #fff;
+                              text-align: center;
+                              font-family: sans-serif;
+                            "
+      >
+        <!-- <div class="xl:col-span-6 lg:col-span-8"> -->
+        <h1>
+          Powerful Digital <br />
+          Cruise Booking With Cruise.T<span>.</span>
+        </h1>
+      </div>
+      <h2
+        style="
+          font-size: 26px;
+          font-weight: 30;
+          line-height: 24px;
+          color: #fff;
+          text-align: center;
+        "
+      >
+        We are team of talented digital marketers
+      </h2>
+
+      <section class="flex flex-row gap-y-4 mt-5 justify-center">
+        <div class="flex flex-row gap-12" data-aos="fade-up">
+          <div class="row gy-4 mt-5 justify-content-center">
+            <div class="get-started-btn sign">
+              <div class="">
+                <i class="ri-store-line"></i>
+                <h3><a href="">Parking</a></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gy-4 mt-5 justify-content-center">
+            <div class="get-started-btn sign">
+              <div class="icon-box">
+                <i class="ri-store-line"></i>
+                <h3><a href="">Room</a></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gy-4 mt-5 justify-content-center">
+            <div class="get-started-btn sign">
+              <div class="icon-box">
+                <i class="ri-store-line"></i>
+                <h3><a href="">Cruise</a></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gy-4 mt-5 justify-content-center">
+            <div class="get-started-btn sign">
+              <div class="icon-box">
+                <i class="ri-store-line"></i>
+                <h3><a href="">Pool</a></h3>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+
+
+<!-- 2 -->
   <div class="flex justify-around mt-5 mb-5 sm:flex flex-wrap px-6 py-6">
     <div class="ml-8">
       <h1 class="font-bold text-yellow-500">OUR SERVICES</h1>
@@ -96,3 +176,16 @@
     </div>
   </div>
 </template>
+
+
+
+<style>
+.background {
+  background-image: url("../../public/pictures/ABOUT_backgrouand.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 440px;
+}
+
+</style>

@@ -80,6 +80,7 @@
 </template>
 
 <script setup>
+
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useAuthStore } from '../stores';
@@ -102,7 +103,7 @@ let download = () => {
   const html = document.getElementById('content');
   doc.html(html, {
     callback: () => {
-      doc.save('output.pdf');
+      doc.save('ticket.pdf');
     },
     x: 15,
     y: 15,

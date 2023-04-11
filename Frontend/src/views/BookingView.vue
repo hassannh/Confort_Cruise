@@ -179,35 +179,7 @@
  </template>
  
  
- <!-- <script setup>
-import VuePagination from 'vue-pagination';
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
-const cruises = ref([]);
-const currentPage = ref(1);
-const perPage = ref(10);
-const total = ref(100);
 
-const paginatedCruises = computed(() => {
-  const startIndex = (currentPage.value - 1) * perPage.value;
-  const endIndex = startIndex + perPage.value;
-  return cruises.value.slice(startIndex, endIndex);
-});
-
-async function fetchData() {
-  const response = await axios.get('/api/cruise');
-  cruises.value = response.data.data;
-  total.value = response.data.total;
-}
-
-function handlePageChanged(newPage) {
-  currentPage.value = newPage;
-}
-
-onMounted(() => {
-  fetchData();
-});
-</script> -->
  
  
  <script setup >

@@ -41,8 +41,10 @@
                 name="room_id"
               >
                 <option disabled value="">roomType</option>
-                <option v-for="element in roomData" :key="element.id">
+                
+                <option v-for="element in roomData" :key="element.id" :value="element.room_type_id">
                   {{ element.room_name + " " + element.room_price }}$
+                
                 </option>
               </select>
             </div>
@@ -94,7 +96,7 @@
         </div>
       </div>
 
-      <!-- Login banner -->
+      <!-- banner -->
       <div
         class="flex flex-wrap content-center justify-center rounded-r-md"
         style="width: 24rem; height: 32rem"
@@ -176,7 +178,8 @@ const submitReservation = async (formData) => {
 
 const getRoomId = async () => {
   try {
-    const { data } = await axios.get(`/api/getRoom_Id/` + route.query.id);
+    console.log( formData.value.room_id +"   TEsttttt" )
+    const { data } = await axios.get(`/api/getRoom_Id/` + formData.value.room_id);
     roomId.value = data;
     formData.value.room_id = data.roomId;
     console.log(data.roomId);

@@ -45,9 +45,9 @@
   import { ref } from "vue";
   import axios from "axios";
   
+  import { useRouter } from 'vue-router';
   
-  
-  
+  let router = useRouter();
   let formData = ref({
     name: ""
   });
@@ -57,7 +57,7 @@
    await axios.post("/api/AddShip", formData.value)
       .then((response) => {
         console.log(response.data);
-        this.router.push('/dashboard');
+        router.push('/dashboard');
       })
       .catch((error) => {
         console.error(error);

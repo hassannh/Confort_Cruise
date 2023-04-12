@@ -136,7 +136,13 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useAuthStore } from "../stores";
-import { useRoute } from "vue-router";
+
+
+import { useRoute } from 'vue-router';
+
+import { useRouter } from 'vue-router';
+let router = useRouter();
+
 
 const authstore = useAuthStore();
 
@@ -160,6 +166,7 @@ var formData = ref({
 
 const route = useRoute();
 
+
 const submitReservation = async (formData) => {
   try {
     await getRoomId(); // wait for getRoomId to complete
@@ -169,6 +176,7 @@ const submitReservation = async (formData) => {
       formData
     );
     console.log(response.data);
+    router.push('/')
   } catch (error) {
     console.error(error);
   }
@@ -178,7 +186,7 @@ const submitReservation = async (formData) => {
 
 const getRoomId = async () => {
   try {
-    console.log( formData.value.room_id +"   TEsttttt" )
+    // console.log( formData.value.room_id +"   TEsttttt" )
     const { data } = await axios.get(`/api/getRoom_Id/` + formData.value.room_id);
     roomId.value = data;
     formData.value.room_id = data.roomId;

@@ -44,7 +44,7 @@
 
 
 						<div class="relative">
-							<button type="submit" class="bg-blue-500 text-white rounded-md px-2 py-1">Submit</button>
+							<button type="submit" class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">Submit</button>
 						</div>
 					</div>
 				</div>

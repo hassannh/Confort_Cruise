@@ -44,9 +44,11 @@
 
 import { ref } from "vue";
 import axios from "axios";
+import { useRouter } from 'vue-router';
 
 
 
+let router = useRouter();
 
 
 let formData = ref({
@@ -58,7 +60,8 @@ const Submit = async () => {
  await axios.post("/api/addPort", formData.value)
     .then((response) => {
       console.log(response.data);
-      this.router.push('/dashboard');
+      router.push('/dashboard');
+      
     })
     .catch((error) => {
       console.error(error);

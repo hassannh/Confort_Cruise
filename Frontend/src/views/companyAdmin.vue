@@ -116,7 +116,7 @@
             </div>
         </div>
         
-        <a class="btn btn-sm btn-primary mx-5"><i class="fa fa-plus"></i> New Port</a>
+        <a class="btn btn-sm btn-primary mx-5"><i class="fa fa-plus"></i> New Company</a> 
         
     </div>
 </template>

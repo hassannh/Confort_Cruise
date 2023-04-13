@@ -51,8 +51,11 @@
           >
           <input
             type="file"
+            accept="image/*"
             class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-            @change="(e) => (formData.picture = e.target.files[0])"
+            @change="handleFileUpload"
+            :value="formData.picture"
+            
             placeholder="Picture"
           />
         </div>
@@ -106,7 +109,7 @@
             name="ports"
           >
             <option value="" disabled selected>select port</option>
-            <option v-for="element in portData" :key="element.id">
+            <option v-for="element in portData" :key="element.id" v-bind:value="element.id">
               {{ element.name }}
             </option>
           </select>
@@ -134,7 +137,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
+let router = useRouter();
 const portData = ref([]);
 const shipData = ref([]);
 
@@ -150,21 +155,37 @@ let formData = ref({
   picture: "",
   nights_number: "",
   ship_id: "",
-  port_id: ""
+  port_id: "",
+  pictureFile: null,
 });
 
+const Submit = async () => {
+  const formDataObj = new FormData();
+  formDataObj.append("name", formData.value.name);
+  formDataObj.append("price", formData.value.price);
+  formDataObj.append("start_date", formData.value.start_date);
+  formDataObj.append("nights_number", formData.value.nights_number);
+  formDataObj.append("ship_id", formData.value.ship_id);
+  formDataObj.append("port_id", formData.value.port_id);
+  formDataObj.append("picture", formData.value.pictureFile);
+  console.log("formData:", formData.value);
 
-
-const Submit = async (formData) => {
- await axios
-    .post("/api/addCruise", formData.value)
+  const response = await axios
+    .post("/api/addCruise", formDataObj)
     .then((response) => {
       console.log(response.data);
-      this.$router.push({ path: "/dashboard" });
+      router.push({ path: "/dashboard" });
     })
     .catch((error) => {
       console.error(error);
     });
+};
+
+// ////////////////////////////////////////////
+
+const handleFileUpload = (e) => {
+  formData.value.pictureFile = e.target.files[0]; // set the pictureFile property of formData to the file object
+  formData.value.picture = e.target.files[0].name; // set the picture property of formData to the file name
 };
 
 // ///////////////////////////////////////////////////////////

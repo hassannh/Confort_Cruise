@@ -15,6 +15,7 @@ let user = null;
 const authStore = useAuthStore();
 if (authStore) {
   user = authStore.user;
+
   if (user && typeof user.role === "number") {
     // User has role 0, do something here
   }
@@ -83,17 +84,12 @@ function toggleMobileNav() {
     </ul>
   </nav>
 
-
-
-
-
   <div class="hidden sm:block bg-black">
-    <li class="float-left text-yellow-500 font-bold ml-10 pt-7 list-none" >
+    <li class="float-left text-yellow-500 font-bold ml-10 pt-7 list-none">
       <RouterLink to="/">CRUISE.T.</RouterLink>
     </li>
     <nav class="navbar">
       <ul>
-
         <RouterLink to="/">
           <li><a class="nav-link scrollto">Home</a></li>
         </RouterLink>
@@ -102,7 +98,7 @@ function toggleMobileNav() {
             <div class="nav-link scrollto">About</div>
           </RouterLink>
         </li>
-        <li
+        <!-- <li
           v-if="
             authStore.user &&
             (authStore.user.role === 1 || authStore.user.role === 2)
@@ -111,7 +107,7 @@ function toggleMobileNav() {
           <RouterLink to="/dashboard">
             <a class="nav-link scrollto">Admin</a>
           </RouterLink>
-        </li>
+        </li> -->
         <li>
           <RouterLink to="/Booking">
             <a class="nav-link scrollto">booking</a>
@@ -133,16 +129,31 @@ function toggleMobileNav() {
             <RouterLink to="/tickets">
               <li><a href="#">Tickets</a></li>
             </RouterLink>
-            <li class="dropdown">
+
+            <li
+              class="dropdown"
+              v-if="
+                authStore.user &&
+                (authStore.user.role === 1 || authStore.user.role === 2)
+              "
+            >
               <a href="#">
                 <span>Admin</span> <i class="bi bi-chevron-right"></i>
               </a>
+
               <ul>
-                <li><a href="#">Deep Drop Down 1</a></li>
-                <li><a href="#">Deep Drop Down 2</a></li>
-                <li><a href="#">Deep Drop Down 3</a></li>
-                <li><a href="#">Deep Drop Down 4</a></li>
-                <li><a href="#">Deep Drop Down 5</a></li>
+                <RouterLink to="/ports">
+                  <li><a href="#">Ports</a></li>
+                </RouterLink>
+                <RouterLink to="/ships">
+                  <li><a href="#">Ships</a></li>
+                </RouterLink>
+                <RouterLink to="/companies">
+                  <li><a href="#">Companies</a></li>
+                </RouterLink>
+                <RouterLink to="/dashboard">
+                  <li><a href="#">Cruises</a></li>
+                </RouterLink>
               </ul>
             </li>
           </ul>
@@ -151,7 +162,16 @@ function toggleMobileNav() {
           <li><a class="nav-link scrollto">Contact</a></li>
         </RouterLink>
       </ul>
-      <li v-if="authStore.user" style="position: relative;right: -40px; margin-top: 12px; padding-left: 109px; list-style: none;">
+      <li
+        v-if="authStore.user"
+        style="
+          position: relative;
+          right: -40px;
+          margin-top: 12px;
+          padding-left: 109px;
+          list-style: none;
+        "
+      >
         <button
           @click="logout"
           class="get-started-btn sign float-right"
@@ -160,7 +180,16 @@ function toggleMobileNav() {
           Logout
         </button>
       </li>
-      <li v-else="!authStore.user" style="position: relative;right: -40px; margin-top: 12px; padding-left: 109px; list-style: none;">
+      <li
+        v-else="!authStore.user"
+        style="
+          position: relative;
+          right: -40px;
+          margin-top: 12px;
+          padding-left: 109px;
+          list-style: none;
+        "
+      >
         <RouterLink to="/register">
           <a class="get-started-btn sign" style="width: 120px; padding: 7px"
             >Get Started</a
@@ -173,7 +202,6 @@ function toggleMobileNav() {
 </template>
 
 <style>
-
 .navbar-2 {
   display: none;
 }

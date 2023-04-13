@@ -167,7 +167,7 @@ import VuePagination from 'vue-pagination'
         const response = await axios.delete(`/api/destroyPort/${id}`);
         ports.value = response.data.port.data;
         console.log(response.data);
-        fetchData();
+        
     }
 
     onMounted(() => {

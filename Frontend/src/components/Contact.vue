@@ -53,6 +53,26 @@
 	</div>
 </div>
 
+<h1 class="flex justify-center text-3xl">Companies</h1>
+
+<div class="flex justify-center justify-around mt-5">
+  <div class="w-20 h-20 rounded-full">
+	<img src="../../public/pictures/C-logo.jpeg" alt="" />
+  </div>
+  <div class="w-20 h-20 rounded-full">
+	<img src="../../public/pictures/th (1).jpeg" alt="" />
+  </div>
+  <div class="w-20 h-20 rounded-full">
+	<img src="../../public/pictures/th (2).jpeg" alt="" />
+  </div>
+  <div class="w-20 h-20 rounded-full">
+	<img src="../../public/pictures/th (3).jpeg" alt="" />
+  </div>
+  <div class="w-20 h-20 rounded-full">
+	<img src="../../public/pictures/th (4).jpeg" alt="" />
+  </div>
+</div>
+
 
 
 </template>

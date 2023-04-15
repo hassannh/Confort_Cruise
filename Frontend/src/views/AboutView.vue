@@ -145,7 +145,7 @@
           href="#"
           class="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600"
         >
-          <strong class="font-medium text-white">Project A</strong>
+          <strong class="font-medium text-white">Comment</strong>
 
           <p class="mt-1 text-xs font-medium text-gray-300">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime

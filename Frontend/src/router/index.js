@@ -14,6 +14,7 @@ import Tickets from '../components/Tickets.vue'
 import Contact from '../components/Contact.vue'
 import AddPort from '../components/AddPort.vue'
 import AddShip from '../components/AddShip.vue'
+import controleBar from '../components/controleBar.vue'
 
 
 const router = createRouter({
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: AboutView
+    },
+    {
+      path: '/controleBar',
+      name: 'controleBar',
+      component: controleBar
     },
     {
       path: '/login',

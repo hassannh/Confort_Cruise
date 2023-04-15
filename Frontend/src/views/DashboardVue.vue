@@ -1,22 +1,24 @@
 <template>
-<!-- 1 -->
+  <!-- 1 -->
 
-<div class="background">
+  <div class="background">
     <div>
       <div
-        class="mt-5"  style="
-                              margin: 0;
-                              font-size: 56px;
-                              font-weight: 700;
-                              line-height: 64px;
-                              color: #fff;
-                              text-align: center;
-                              font-family: sans-serif;
-                            "
+        class="mt-5"
+        style="
+          margin: 0;
+          font-size: 56px;
+          font-weight: 700;
+          line-height: 64px;
+          color: #fff;
+          text-align: center;
+          font-family: sans-serif;
+        "
       >
         <!-- <div class="xl:col-span-6 lg:col-span-8"> -->
         <h1>
-          Admin dashboard <br> managment
+          Admin dashboard <br />
+          managment
         </h1>
       </div>
       <h2
@@ -28,48 +30,20 @@
           text-align: center;
         "
       >
-      Cruises Managment
+        Cruises Managment
       </h2>
-
-      
     </div>
   </div>
 
-<!-- 2 -->
+  <!-- 2 -->
   <div class="w-3/4 mx-auto mt-6 mb-6">
     <div class="flex flex-col">
       <h1 class="text-6xl font-extrabold tracking-tighter text-center mb-4">
         Dashboard Controller
       </h1>
       <div class="shadow-md sm:rounded-lg mt-4">
-        <div class="gap-3 flex flex-row justify-center mb-5">
-          <RouterLink to="/dashboard">
-            <a
-              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >Cruises</a
-            >
-          </RouterLink>
 
-          <RouterLink to="/ports">
-            <a
-              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >Ports</a
-            >
-          </RouterLink>
-
-          <RouterLink to="/ships">
-            <a
-              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >Ships</a
-            >
-          </RouterLink>
-          <RouterLink to="/companies">
-            <a
-              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >Companies</a
-            >
-          </RouterLink>
-        </div>
+        <controleBar></controleBar>
 
         <div class="inline-block min-w-full align-middle">
           <div class="overflow-hidden">
@@ -117,7 +91,7 @@
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white"
                   >
-                  {{ cruise.port_name }}
+                    {{ cruise.port_name }}
                   </td>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -155,7 +129,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import VuePagination from 'vue-pagination'
+import { useAuthStore } from "../stores";
+import controleBar from '../components/controleBar.vue'
+
+
+
+
+
 
 const cruises = ref([]);
 const fetchData = async () => {
@@ -175,9 +155,24 @@ const destroy = async (id) => {
 onMounted(() => {
   fetchData();
 });
+
+let user = null;
+const authStore = useAuthStore();
+if (authStore) {
+  user = authStore.user;
+
+  if (user && typeof user.role === "number") {
+    // User has role 0, do something here
+  }
+} else {
+  console.error("Authentication store not found");
+}
+
+// add the component to the components property
+const components = {
+  controleBar
+}
 </script>
-
-
 
 <style>
 .background {
@@ -187,5 +182,4 @@ onMounted(() => {
   width: 100%;
   height: 340px;
 }
-
 </style>

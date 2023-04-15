@@ -57,7 +57,7 @@
    await axios.post("/api/AddShip", formData.value)
       .then((response) => {
         console.log(response.data);
-        router.push('/dashboard');
+        router.push('/ships');
       })
       .catch((error) => {
         console.error(error);

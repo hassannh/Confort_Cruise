@@ -43,32 +43,8 @@
         Dashboard Controller
       </h1>
       <div class="shadow-md sm:rounded-lg mt-4">
-        <div class="gap-3 flex flex-row justify-center mb-5">
-          <RouterLink to="/dashboard">
-            <a
-              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >Cruises</a
-            >
-          </RouterLink>
-          <RouterLink to="/ports">
-            <a
-              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >Ports</a
-            >
-          </RouterLink>
-          <RouterLink to="/ships">
-            <a
-              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >Ships</a
-            >
-          </RouterLink>
-          <RouterLink to="/companies">
-            <a
-              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >Companies</a
-            >
-          </RouterLink>
-        </div>
+        
+        <controleBar></controleBar>
 
         <div class="inline-block min-w-full align-middle">
           <div class="overflow-hidden">
@@ -152,6 +128,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import VuePagination from 'vue-pagination'
+import controleBar from '../components/controleBar.vue'
 
 
     const ports = ref([]);

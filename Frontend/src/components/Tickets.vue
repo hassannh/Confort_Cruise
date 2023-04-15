@@ -1,23 +1,22 @@
 <template>
-<!-- 1 -->
+  <!-- 1 -->
 
-<div class="background">
+  <div class="background">
     <div>
       <div
-        class="mt-5"  style="
-                              margin: 0;
-                              font-size: 56px;
-                              font-weight: 700;
-                              line-height: 64px;
-                              color: #fff;
-                              text-align: center;
-                              font-family: sans-serif;
-                            "
+        class="mt-5"
+        style="
+          margin: 0;
+          font-size: 56px;
+          font-weight: 700;
+          line-height: 64px;
+          color: #fff;
+          text-align: center;
+          font-family: sans-serif;
+        "
       >
         <!-- <div class="xl:col-span-6 lg:col-span-8"> -->
-        <h1>
-          Booked Tickets Area
-        </h1>
+        <h1>Booked Tickets Area</h1>
       </div>
       <h2
         style="
@@ -28,14 +27,12 @@
           text-align: center;
         "
       >
-      We are team of talented digital marketers
+        We are team of talented digital marketers
       </h2>
-
-      
     </div>
   </div>
 
-<!-- 2 -->
+  <!-- 2 -->
   <div
     id="content"
     class="flex flex-col justify-center h-screen ml-16"
@@ -50,13 +47,17 @@
       >
         <img :src="'../../public/pictures/' + ticket.cruise_picture" />
       </div>
-      <div class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3 rounded-xl border border-yellow-500">
+      <div
+        class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3 rounded-xl border border-yellow-500"
+      >
         <div class="flex justify-between item-center">
-          <div
+          <button
             class="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block"
+            @click="destroy(ticket.id)"
           >
-            <a @click="destroy(ticket.id)">Cancel</a>
-          </div>
+            Cancel
+            <!-- <a ></a> -->
+          </button>
         </div>
         <h3 class="font-black text-gray-800 md:text-3xl text-xl">
           {{ ticket.cruise_name }}
@@ -64,6 +65,9 @@
         <p class="md:text-lg text-gray-500 text-base">
           ¤ Room : {{ ticket.room_id }}<br />¤ start date :
           {{ ticket.cruise_start_date }}
+        </p>
+        <p class="md:text-lg text-gray-500 text-base">
+          ¤ Parking ID : {{ ticket.parking_id }}
         </p>
         <p class="text-xl font-black text-gray-800">
           price
@@ -74,18 +78,16 @@
         </p>
       </div>
     </div>
-    <button @click="download"> Download PDF</button>
+    <button @click="download">Download PDF</button>
   </div>
-  
 </template>
 
 <script setup>
-
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { useAuthStore } from '../stores';
-import  {useRoute} from 'vue-router'
-import jsPDF from 'jspdf';
+import { useAuthStore } from "../stores";
+import { useRoute } from "vue-router";
+import jsPDF from "jspdf";
 
 const authstore = useAuthStore();
 const route = useRoute();
@@ -97,21 +99,20 @@ let fetchTickets = async () => {
   tickets.value = response.data.reservations;
 };
 
-
 let download = () => {
   const doc = new jsPDF();
-  const html = document.getElementById('content');
+  const html = document.getElementById("content");
   doc.html(html, {
     callback: () => {
-      doc.save('ticket.pdf');
+      doc.save("ticket.pdf");
     },
     x: 15,
     y: 15,
     html2canvas: {
-      scale: 0.1
+      scale: 0.1,
     },
     margin: [0, 0, 0, 0],
-    useCORS: true
+    useCORS: true,
   });
 };
 
@@ -121,7 +122,6 @@ const destroy = async (id) => {
   tickets.value = response.data.ticket.data;
   console.log(response.data);
 };
-
 
 onMounted(() => {
   fetchTickets();

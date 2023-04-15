@@ -240,6 +240,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import VuePagination from "vue-pagination";
+import { defineProps } from "vue";
 
 export default {
   setup() {
@@ -258,6 +259,17 @@ export default {
     return { cruises };
   },
 };
+
+defineProps({
+  cruise: {
+    type: Object,
+    required: true,
+  },
+  auth: {
+    type: Boolean,
+    required: true,
+  },
+});
 </script>
 
 <style>

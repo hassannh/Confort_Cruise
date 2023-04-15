@@ -160,7 +160,7 @@
           </div>
 
           <div class="grid grid-cols-2 mt-8">
-            <div class="flex items-center" v-if="auth">
+            <div class="flex items-center" v-if="auth = true">
               <RouterLink :to="`/reservation?id=${cruise.id}`">
                 <div
                   class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200"

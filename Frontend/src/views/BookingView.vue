@@ -194,6 +194,17 @@
     </div>
   </div>
 
+  <div class="flex justify-center mt-5">
+    <VPagination
+      :total="cruises.length"
+      :page="page"
+      :limit="6"
+      :page-size="6"
+      :page-size-options="[3, 6, 9]"
+      @page-change="handlePageChange"
+    />
+  </div>
+
   <h1 class="flex justify-center text-3xl">Companies</h1>
 
   <div class="flex justify-center justify-around mt-5">
@@ -218,21 +229,22 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-// import DataTable from 'datatables.net-vue3';
-// import DataTablelib from 'datatables.net-bs5';
-// import Buttons from 'datatables.net-buttons-bs5';
-// import Buttonshtml5 from 'datatables.net-buttons/js/buttons.html5';
 import { defineProps } from "vue";
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
 const cruises = ref([]);
+let page = ref(1)
+const totalPages = ref(0);
 
-const fetchData = async () => {
-  const response = await axios.get("/api/cruise");
+const fetchData = async (page) => {
+  const response = await axios.get('/api/cruise?page=' + page);
+  totalPages = response.data.pagesCount
   cruises.value = response.data.data;
 };
 
 onMounted(() => {
-  fetchData();
+  fetchData(page.value);
 });
 
 defineProps({

@@ -46,7 +46,6 @@ function toggleMobileNav() {
     </li>
   </div>
 
-
   <!-- navbar 2 -->
 
   <nav class="navbar-2 bg-black" id="nav-2">
@@ -93,7 +92,6 @@ function toggleMobileNav() {
       <li
         v-if="authStore.user"
         class="flex justify-center sm:flex justify-center pt-1"
-
       >
         <button
           @click="logout"
@@ -108,9 +106,7 @@ function toggleMobileNav() {
         class="flex justify-center sm:flex justify-center pt-1"
       >
         <RouterLink to="/register">
-          <a class="get-started-btn sign" 
-            >Get Started</a
-          >
+          <a class="get-started-btn sign">Get Started</a>
         </RouterLink>
       </li>
     </ul>
@@ -118,77 +114,86 @@ function toggleMobileNav() {
 
   <!-- navbar 1 -->
 
-  <div class="hidden sm:block bg-black flex flex-row">
-    <li class="float-left text-yellow-500 font-bold ml-10 pt-7 list-none">
-      <RouterLink to="/">CRUISE.T.</RouterLink>
-    </li>
-    <nav class="navbar">
-      <ul>
-        <RouterLink to="/">
-          <li><a class="nav-link scrollto">Home</a></li>
-        </RouterLink>
-        <li>
-          <RouterLink to="/about">
-            <div class="nav-link scrollto">About</div>
-          </RouterLink>
+  <div class="hidden sm:block bg-black">
+    <div class="flex flex-row justify-around">
+      <div>
+        <li class="float-left text-yellow-500 font-bold ml-10 pt-7 list-none">
+          <RouterLink to="/">CRUISE.T.</RouterLink>
         </li>
-        <li>
-          <RouterLink to="/Booking">
-            <a class="nav-link scrollto">booking</a>
-          </RouterLink>
-        </li>
-        <li
-          class="dropdown"
-          v-if="
-            authStore.user &&
-            (authStore.user.role === 1 ||
-              authStore.user.role === 2 ||
-              authStore.user.role === 0)
-          "
-        >
-          <a href="#">
-            <span>Options</span> <i class="bi bi-chevron-down"></i>
-          </a>
-          <ul>
-            <RouterLink to="/tickets">
-              <li><a href="#">Tickets</a></li>
-            </RouterLink>
+      </div>
 
+      <div>
+        <nav class="navbar">
+          <ul>
+            <RouterLink to="/">
+              <li><a class="nav-link scrollto">Home</a></li>
+            </RouterLink>
+            <li>
+              <RouterLink to="/about">
+                <div class="nav-link scrollto">About</div>
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/Booking">
+                <a class="nav-link scrollto">booking</a>
+              </RouterLink>
+            </li>
             <li
               class="dropdown"
               v-if="
                 authStore.user &&
-                (authStore.user.role === 1 || authStore.user.role === 2)
+                (authStore.user.role === 1 ||
+                  authStore.user.role === 2 ||
+                  authStore.user.role === 0)
               "
             >
               <a href="#">
-                <span>Admin</span> <i class="bi bi-chevron-right"></i>
+                <span>Options</span> <i class="bi bi-chevron-down"></i>
               </a>
-
               <ul>
-                <RouterLink to="/ports">
-                  <li><a href="#">Ports</a></li>
+                <RouterLink to="/tickets">
+                  <li><a href="#">Tickets</a></li>
                 </RouterLink>
-                <RouterLink to="/ships">
-                  <li><a href="#">Ships</a></li>
-                </RouterLink>
-                <RouterLink to="/companies">
-                  <li><a href="#">Companies</a></li>
-                </RouterLink>
-                <RouterLink to="/dashboard">
-                  <li><a href="#">Cruises</a></li>
-                </RouterLink>
+
+                <li
+                  class="dropdown"
+                  v-if="
+                    authStore.user &&
+                    (authStore.user.role === 1 || authStore.user.role === 2)
+                  "
+                >
+                  <a href="#">
+                    <span>Admin</span> <i class="bi bi-chevron-right"></i>
+                  </a>
+
+                  <ul>
+                    <RouterLink to="/ports">
+                      <li><a href="#">Ports</a></li>
+                    </RouterLink>
+                    <RouterLink to="/ships">
+                      <li><a href="#">Ships</a></li>
+                    </RouterLink>
+                    <RouterLink to="/companies">
+                      <li><a href="#">Companies</a></li>
+                    </RouterLink>
+                    <RouterLink to="/dashboard">
+                      <li><a href="#">Cruises</a></li>
+                    </RouterLink>
+                  </ul>
+                </li>
               </ul>
             </li>
+            <RouterLink to="/Contact">
+              <li><a class="nav-link scrollto">Contact</a></li>
+            </RouterLink>
           </ul>
-        </li>
-        <RouterLink to="/Contact">
-          <li><a class="nav-link scrollto">Contact</a></li>
-        </RouterLink>
+        </nav>
+      </div>
+
+      <div>
         <li
-        class="float-right"
+          class="float-right"
           v-if="authStore.user"
-          
           style="
             position: relative;
             right: -40px;
@@ -205,26 +210,13 @@ function toggleMobileNav() {
             Logout
           </button>
         </li>
-        <li
-          v-else="!authStore.user"
-          style="
-            position: relative;
-            right: -40px;
-            margin-top: 12px;
-            padding-left: 109px;
-            list-style: none;
-          "
-        >
+        <li v-else="!authStore.user" class="mt-5">
           <RouterLink to="/register">
-            <a class="get-started-btn sign" style="width: 120px; padding: 7px"
-              >Get Started</a
-            >
+            <a class="get-started-btn sign">Get Started</a>
           </RouterLink>
         </li>
-      </ul>
-    </nav>
-    
-    
+      </div>
+    </div>
   </div>
   <RouterView />
 </template>

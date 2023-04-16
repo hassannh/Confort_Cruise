@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@hennge/vue3-pagination": "^1.0.17"
+  }
+}

@@ -87,8 +87,11 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useAuthStore } from "../stores";
 import { useRoute } from "vue-router";
+import { useRouter } from 'vue-router';
 import jsPDF from "jspdf";
 
+
+let router = useRouter();
 const authstore = useAuthStore();
 const route = useRoute();
 
@@ -120,6 +123,7 @@ const destroy = async (id) => {
   console.log(id);
   const response = await axios.delete(`/api/destroyReservation/${id}`);
   tickets.value = response.data.ticket.data;
+  router.push('/tickets')
   console.log(response.data);
 };
 

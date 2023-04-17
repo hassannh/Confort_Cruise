@@ -190,7 +190,7 @@ function toggleMobileNav() {
         </nav>
       </div>
 
-      <div>
+      <div class="mt-3">
         <li
           class="float-right"
           v-if="authStore.user"

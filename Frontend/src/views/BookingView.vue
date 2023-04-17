@@ -1,3 +1,40 @@
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
+import { defineProps } from "vue";
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+
+let cruises;
+let page = ref(1);
+const totalPages = ref(0);
+
+
+const fetchData = async () => {
+  const response = await axios.get("/api/cruise?page=" + page.value);
+  totalPages.value = response.data.pagesCount;
+  cruises = response.data.cruises
+  console.log(cruises);
+};
+
+
+onMounted(() => {
+  fetchData(page.value);
+});
+
+defineProps({
+  cruise: {
+    type: Object,
+    required: true,
+  },
+  auth: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+</script>
+
 <template>
   <div class="backgraund">
     <div class="">
@@ -80,14 +117,12 @@
 
   <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mx-3 my-6"
+    
   >
     <div
       class="relative mx-auto w-full"
       ref="cruises"
       v-for="cruise in cruises"
-      :key="cruise"
-      
-      
     >
       <a
         href="#"
@@ -140,7 +175,7 @@
                   d="M570.53,242,512,190.75V48a16,16,0,0,0-16-16H400a16,16,0,0,0-16,16V78.75L298.53,4a16,16,0,0,0-21.06,0L5.47,242a16,16,0,0,0,21.07,24.09L64,233.27V464a48.05,48.05,0,0,0,48,48H464a48.05,48.05,0,0,0,48-48V233.27l37.46,32.79A16,16,0,0,0,570.53,242ZM480,464a16,16,0,0,1-16,16H112a16,16,0,0,1-16-16V205.27l192-168,192,168Zm0-301.25-64-56V64h64ZM208,218.67V325.34A26.75,26.75,0,0,0,234.66,352H341.3A26.76,26.76,0,0,0,368,325.34V218.67A26.75,26.75,0,0,0,341.3,192H234.66A26.74,26.74,0,0,0,208,218.67ZM240,224h96v96H240Z"
                 ></path>
               </svg>
-              <span class="mt-2 xl:mt-0"> Port: {{ cruise.start_port }} </span>
+              <span class="mt-2 xl:mt-0"> Port: {{ cruise.port_id }} </span>
             </p>
             <p
               class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800"
@@ -162,7 +197,7 @@
           </div>
 
           <div class="grid grid-cols-2 mt-8">
-            <div class="flex items-center" v-if="auth = true">
+            <div class="flex items-center" v-if="(auth = true)">
               <RouterLink :to="`/reservation?id=${cruise.id}`">
                 <div
                   class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200"
@@ -196,25 +231,18 @@
     </div>
   </div>
 
+
   <div class="flex justify-center mt-5">
-    <!-- <VPagination
-      :total="cruises.length"
-      :page="page"
-      :limit="6"
-      :page-size="6"
-      :page-size-options="[3, 6, 9]"
-      @page-change="handlePageChange"
-    /> -->
     <VPagination
-        v-model="page"
-        :pages="5"
-        :range-size="1"
-        active-color="#DDDDDD"
-        inactive-color="#GHGHGH"
-        :show-prev-next="true"
-        :show-first-last="true"
-        :show-page-size="false"
-        @update:modelValue="fetchData()"
+      v-model="page"
+      :pages="totalPages"
+      :range-size="1"
+      active-color="#DDDDDD"
+      inactive-color="#GHGHGH"
+      :show-prev-next="true"
+      :show-first-last="true"
+      :show-page-size="false"
+      @update:modelValue="fetchData()"
     />
   </div>
 
@@ -239,43 +267,4 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { defineProps } from "vue";
-import VPagination from "@hennge/vue3-pagination";
-import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
-const cruises = ref([]);
-let page = ref(1);
-const totalPages = ref(0);
-
-const fetchData = async (page) => {
-  const response = await axios.get('/api/cruise?page=' + page);
-  totalPages.value = response.data.pagesCount;
-  response.data.cruises.forEach(element => {
-    if(element.id){
-      cruises.value.push(element);
-      console.log(element)
-    }
-    
-  });
-  console.log("dioqhdiosqoi dsiqhdmihsq diosqhdihsqoidh")
-  console.log(cruises.value)
-};
-
-onMounted(() => {
-  fetchData(page.value);
-});
-
-// defineProps({
-//   cruise: {
-//     type: Object,
-//     required: true,
-//   },
-//   auth: {
-//     type: Boolean,
-//     required: true,
-//   },
-// });
-</script>

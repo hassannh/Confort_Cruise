@@ -2,8 +2,7 @@
   <div class="backgraund">
     <div>
       <div
-        class="mt-5"
-        style="
+        class="mt-5" style="
           margin: 0;
           font-size: 56px;
           font-weight: 700;
@@ -177,7 +176,7 @@
           </div>
 
           <div class="grid grid-cols-2 mt-8">
-            <div class="flex items-center" v-if="auth">
+            <div class="flex items-center" v-if="auth == true">
               <RouterLink :to="`/reservation?id=${cruise.id}`">
                 <div
                   class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200"
@@ -210,6 +209,19 @@
       </a>
     </div>
   </div>
+  <div class="flex justify-center mt-5">
+    <VPagination
+      v-model="page"
+      :pages="totalPages"
+      :range-size="1"
+      active-color="#DDDDDD"
+      inactive-color="#GHGHGH"
+      :show-prev-next="true"
+      :show-first-last="true"
+      :show-page-size="false"
+      @update:modelValue="fetchData()"
+    />
+  </div>
 
   <div class="my-5 mx-5 h-50px">
     <img src="../../public/pictures/cruiseee.avif" alt="" />
@@ -236,29 +248,27 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import VuePagination from "vue-pagination";
 import { defineProps } from "vue";
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
-export default {
-  setup() {
-    const cruises = ref([]);
+let cruises;
+let page = ref(1);
+const totalPages = ref(0);
 
-    const fetchData = async () => {
-      const response = await axios.get("/api/cruise");
-      cruises.value = response.data.data;
-    };
-
-    onMounted(() => {
-      fetchData();
-      console.log(cruises.value);
-    });
-
-    return { cruises };
-  },
+const fetchData = async () => {
+  const response = await axios.get("/api/cruise?page=" + page.value);
+  totalPages.value = response.data.pagesCount;
+  cruises = response.data.cruises;
+  console.log(cruises);
 };
+
+onMounted(() => {
+  fetchData(page.value);
+});
 
 defineProps({
   cruise: {

@@ -161,7 +161,7 @@ var formData = ref({
   cruise_id: "",
   room_id: "",
   parking_id: "",
-  price: ''
+  price: 3
 });
 
 const route = useRoute();

@@ -85,7 +85,9 @@
       class="relative mx-auto w-full"
       ref="cruises"
       v-for="cruise in cruises"
-      :key="cruise.id"
+      :key="cruise"
+      
+      
     >
       <a
         href="#"
@@ -195,13 +197,24 @@
   </div>
 
   <div class="flex justify-center mt-5">
-    <VPagination
+    <!-- <VPagination
       :total="cruises.length"
       :page="page"
       :limit="6"
       :page-size="6"
       :page-size-options="[3, 6, 9]"
       @page-change="handlePageChange"
+    /> -->
+    <VPagination
+        v-model="page"
+        :pages="5"
+        :range-size="1"
+        active-color="#DDDDDD"
+        inactive-color="#GHGHGH"
+        :show-prev-next="true"
+        :show-first-last="true"
+        :show-page-size="false"
+        @update:modelValue="fetchData()"
     />
   </div>
 
@@ -234,27 +247,35 @@ import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
 const cruises = ref([]);
-let page = ref(1)
+let page = ref(1);
 const totalPages = ref(0);
 
 const fetchData = async (page) => {
   const response = await axios.get('/api/cruise?page=' + page);
-  totalPages = response.data.pagesCount
-  cruises.value = response.data.data;
+  totalPages.value = response.data.pagesCount;
+  response.data.cruises.forEach(element => {
+    if(element.id){
+      cruises.value.push(element);
+      console.log(element)
+    }
+    
+  });
+  console.log("dioqhdiosqoi dsiqhdmihsq diosqhdihsqoidh")
+  console.log(cruises.value)
 };
 
 onMounted(() => {
   fetchData(page.value);
 });
 
-defineProps({
-  cruise: {
-    type: Object,
-    required: true,
-  },
-  auth: {
-    type: Boolean,
-    required: true,
-  },
-});
+// defineProps({
+//   cruise: {
+//     type: Object,
+//     required: true,
+//   },
+//   auth: {
+//     type: Boolean,
+//     required: true,
+//   },
+// });
 </script>

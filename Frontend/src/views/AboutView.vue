@@ -34,7 +34,7 @@
         We are team of talented digital marketers
       </h2>
 
-      <section class="flex flex-row gap-y-4 mt-5 justify-center">
+      <section class="flex flex-row gap-y-4 mt-5 justify-center ">
         <div class="flex flex-row gap-12" data-aos="fade-up">
           <div class="row gy-4 mt-5 justify-content-center">
             <div class="get-started-btn sign">
@@ -81,20 +81,20 @@
 <!-- 2 -->
   <div class="flex justify-around mt-5 mb-5 sm:flex flex-wrap px-6 py-6">
     <div class="ml-8">
-      <h1 class="font-bold text-yellow-500">OUR SERVICES</h1>
+      <h1 class="font-bold text-yellow-500">Range Of Services</h1>
       <br />
       <ul class="">
-        <li>#- booking places</li>
+        <li>#- Booking accommodation</li>
         <br />
-        <li>#- booking parking places</li>
+        <li>#- Reserving parking spaces</li>
         <br />
-        <li>#- free food</li>
+        <li>#- Complimentary food and beverages</li>
         <br />
-        <li>#- free drink</li>
+        <li>#- Spectacular events and parties</li>
         <br />
         <li>#- wonderful parties</li>
         <br />
-        <li>#- booking room</li>
+        <li>#- Room reservations</li>
       </ul>
     </div>
 
@@ -121,18 +121,10 @@
 
         <div class="flow-root">
           <ul class="-m-1 flex flex-wrap">
-            <li class="p-1 leading-none">
-              <a href="#" class="text-xs font-medium text-gray-300">
-                Twitter
-              </a>
-            </li>
+           
 
             <li class="p-1 leading-none">
-              <a href="#" class="text-xs font-medium text-gray-300"> GitHub </a>
-            </li>
-
-            <li class="p-1 leading-none">
-              <a href="#" class="text-xs font-medium text-gray-300">Website</a>
+              <a href="#" class="text-xs font-medium text-gray-300"> Mumber </a>
             </li>
           </ul>
         </div>
@@ -148,8 +140,10 @@
           <strong class="font-medium text-white">Comment</strong>
 
           <p class="mt-1 text-xs font-medium text-gray-300">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-            consequuntur deleniti, unde ab ut in!
+            I just wanted to take a moment to express my heartfelt
+             gratitude for the amazing experience you provided on 
+             my recent cruise. It was truly a dream come true and I 
+             cannot thank you enough for the memories that will last a lifetime.
           </p>
         </a>
       </li>

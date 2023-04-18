@@ -115,6 +115,19 @@
         </div>
       </div>
     </div>
+     <div class="flex justify-center mt-5">
+    <VPagination
+      v-model="page"
+      :pages="totalPages"
+      :range-size="1"
+      active-color="#DDDDDD"
+      inactive-color="#GHGHGH"
+      :show-prev-next="true"
+      :show-first-last="true"
+      :show-page-size="false"
+      @update:modelValue="fetchData()"
+    />
+  </div>
     <RouterLink to="/AddShip">
       <a class="btn btn-sm btn-primary mx-5">
         <i class="fa fa-plus"></i> 
@@ -129,12 +142,17 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import VuePagination from 'vue-pagination'
 import controleBar from '../components/controleBar.vue'
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
     const ships = ref([]);
+    let page = ref(1);
+    const totalPages = ref(0);
 
     const fetchData = async () => {
-      const response = await axios.get("/api/getShip");
-      ships.value = response.data.Ship.data;
+      const response = await axios.get("/api/getShip?page=" + page.value);
+      totalPages.value = response.data.pagesCount;
+      ships.value = response.data.Ship;
       console.log(response.data);
     };
 
@@ -146,7 +164,7 @@ import controleBar from '../components/controleBar.vue'
     }
 
     onMounted(() => {
-      fetchData();
+      fetchData(page.value);
       // console.log(response.data);
     });
 

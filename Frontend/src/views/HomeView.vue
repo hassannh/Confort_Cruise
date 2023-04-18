@@ -1,16 +1,14 @@
 <script setup>
-import { ref, onMounted ,computed} from "vue";
+import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import { defineProps } from "vue";
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
-
 const cruises = ref([]);
 let page = ref(1);
 const totalPages = ref(0);
 const searchQuery = ref("");
-
 
 const fetchData = async () => {
   const response = await axios.get("/api/cruise?page=" + page.value);
@@ -21,12 +19,13 @@ const fetchData = async () => {
 
 const filteredCruises = computed(() => {
   if (cruises.value.length > 0) {
-    return cruises.value.filter(cruise => cruise.name.includes(searchQuery.value));
+    return cruises.value.filter((cruise) =>
+      cruise.name.includes(searchQuery.value)
+    );
   } else {
     return [];
   }
 });
-
 
 onMounted(() => {
   fetchData(page.value);
@@ -42,17 +41,14 @@ defineProps({
     required: true,
   },
 });
-
 </script>
-
-
-
 
 <template>
   <div class="backgraund">
     <div>
       <div
-        class="mt-5" style="
+        class="mt-5"
+        style="
           margin: 0;
           font-size: 56px;
           font-weight: 700;
@@ -68,20 +64,12 @@ defineProps({
           Cruise Booking With Cruise.T<span>.</span>
         </h1>
       </div>
-      <h2
-        style="
-          font-size: 26px;
-          font-weight: 30;
-          line-height: 24px;
-          color: #fff;
-          text-align: center;
-        "
-      >
+      <h2 style="font-size: 26px;font-weight: 30;line-height: 24px;color: #fff;text-align: center;">
         We are team of talented digital marketers
       </h2>
 
       <section class="flex flex-row gap-y-4 mt-5 justify-center">
-        <div class="flex flex-row gap-12" data-aos="fade-up">
+        <div class="flex flex-row gap-9" data-aos="fade-up">
           <div class="row gy-4 mt-5 justify-content-center">
             <div class="get-started-btn sign">
               <div class="">
@@ -122,20 +110,19 @@ defineProps({
     </div>
   </div>
 
-  <div class="flex justify-center mt-5 mb-5 sm:flex flex-wrap px-6 py-6">
+  <div class="flex justify-around mt-5 mb-5 sm:flex flex-wrap px-6 py-6">
     <div class="max-w-md mx-4">
       <h1 class="font-bold">welcome to your cruise tour company</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor sunt
-        ducimus <br />
-        vero in rerum deserunt reiciendis omnis, natus libero quidem? Minus
-        soluta consequatur <br />
-        placeat modi ex vitae perspiciatis nulla nemo. Lorem ipsum dolor sit
-        amet <br />
-        consectetur adipisicing elit. Autem impedit qui libero deserunt quasi
-        optio molestias <br />
-        consequuntur dignissimos provident dolor <br />
-        ut cum modi excepturi, unde iste est blanditiis illum magni.
+        Welcome to our cruise tour company! We are thrilled to offer
+         you an unforgettable experience on the open seas. Our cruises
+          take you to some of the most breathtaking destinations in the world,
+           including the Caribbean, the Mediterranean, and Alaska.
+
+          Our ships are designed to provide the ultimate in comfort and luxury,
+           with spacious cabins, world-class restaurants, and a wide range of onboard 
+           activities. Whether you want to relax by the pool, hit the gym, or catch
+            a show in the theater, there is something for everyone on our cruises.
       </p>
     </div>
 
@@ -147,21 +134,35 @@ defineProps({
   <h1 class="ml-5">NEW CRUISES</h1>
 
   <!-- Search Component -->
-<div class='max-w-md mx-auto'>
-    <div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-        <div class="grid place-items-center h-full w-12 text-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        </div>
-        <input
+  <div class="max-w-md mx-auto">
+    <div
+      class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden"
+    >
+      <div class="grid place-items-center h-full w-12 text-gray-300">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </div>
+      <input
         class="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
         type="text"
         id="search"
         v-model="searchQuery"
-        placeholder="Search something.." /> 
+        placeholder="Search something.."
+      />
     </div>
-</div>
+  </div>
 
   <!-- <div class="peer h-full w-full outline-none text-sm text-gray-700 pr-2">
     <input 
@@ -253,7 +254,7 @@ defineProps({
           </div>
 
           <div class="grid grid-cols-2 mt-8">
-            <div class="flex items-center" v-if="auth == true">
+            <div class="flex items-center" v-if="auth == false">
               <RouterLink :to="`/reservation?id=${cruise.id}`">
                 <div
                   class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-yellow-400 cursor-pointer hover:bg-yellow-600 hover:text-yellow-200"
@@ -324,11 +325,6 @@ defineProps({
     </div>
   </div>
 </template>
-
-
-
-
-
 
 <style>
 .backgraund {

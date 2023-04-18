@@ -78,12 +78,12 @@ defineProps({
       </h2>
 
       <section class="flex flex-row gap-y-4 mt-5 justify-center">
-        <div class="flex flex-row gap-12" data-aos="fade-up">
+        <div class="flex flex-row gap-9" data-aos="fade-up">
           <div class="row gy-4 mt-5 justify-content-center">
             <div class="get-started-btn sign">
               <div class="">
                 <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
+                <h3><a href="">Parking</a></h3>
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@ defineProps({
             <div class="get-started-btn sign">
               <div class="icon-box">
                 <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
+                <h3><a href="">Room</a></h3>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@ defineProps({
             <div class="get-started-btn sign">
               <div class="icon-box">
                 <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
+                <h3><a href="">Cruise</a></h3>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@ defineProps({
             <div class="get-started-btn sign">
               <div class="icon-box">
                 <i class="ri-store-line"></i>
-                <h3><a href="">Lorem Ipsum</a></h3>
+                <h3><a href="">Pool</a></h3>
               </div>
             </div>
           </div>

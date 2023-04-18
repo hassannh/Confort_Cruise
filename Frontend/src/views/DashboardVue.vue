@@ -115,14 +115,27 @@
         </div>
       </div>
     </div>
+
+    <div class="flex justify-center mt-5">
+    <VPagination
+      v-model="page"
+      :pages="totalPages"
+      :range-size="1"
+      active-color="#DDDDDD"
+      inactive-color="#GHGHGH"
+      :show-prev-next="true"
+      :show-first-last="true"
+      :show-page-size="false"
+      @update:modelValue="fetchData()"
+    />
+  </div>
+
     <RouterLink to="/add_cruise">
       <a class="btn btn-sm btn-primary"
         ><i class="fa fa-plus"></i> New Cruise</a
       >
     </RouterLink>
 
-    <!-- <a href="<?= URLROOT ?>Pages/add_port" class="btn btn-sm btn-primary mx-5"><i class="fa fa-plus"></i> New Port</a> -->
-    <!-- <a href="<?= URLROOT ?>Pages/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New Ship</a> -->
   </div>
 </template>
 
@@ -130,16 +143,22 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useAuthStore } from "../stores";
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 import controleBar from '../components/controleBar.vue'
 
 
 
 
 
-
 const cruises = ref([]);
+let page = ref(1);
+const totalPages = ref(0);
+
+
 const fetchData = async () => {
-  const response = await axios.get("/api/Admin");
+  const response = await axios.get("/api/Admin?page=" + page.value);
+  totalPages.value = response.data.pagesCount;
   cruises.value = response.data.cruises;
   console.log(response.data);
 };
@@ -149,11 +168,12 @@ const destroy = async (id) => {
   const response = await axios.delete(`/api/destroyCruise/${id}`);
   cruises.value = response.data.cruise.data;
   console.log(response.data);
-  fetchData();
 };
 
+
+
 onMounted(() => {
-  fetchData();
+  fetchData(page.value);
 });
 
 let user = null;

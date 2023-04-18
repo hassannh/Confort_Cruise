@@ -123,7 +123,7 @@ const destroy = async (id) => {
   console.log(id);
   const response = await axios.delete(`/api/destroyReservation/${id}`);
   tickets.value = response.data.ticket.data;
-  router.push('/tickets')
+  router.push('/tickets') 
   console.log(response.data);
 };
 

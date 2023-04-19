@@ -17,7 +17,7 @@ if (authStore) {
   user = authStore.user;
 
   if (user && typeof user.role === "number") {
-    // User has role 0, do something here
+    // User has role 0,
   }
 } else {
   console.error("Authentication store not found");
@@ -210,7 +210,7 @@ function toggleMobileNav() {
             Logout
           </button>
         </li>
-        <li v-else="!authStore.user" class="mt-5">
+        <li v-else="!authStore.user" class="mt-2">
           <RouterLink to="/register">
             <a class="get-started-btn sign">Get Started</a>
           </RouterLink>

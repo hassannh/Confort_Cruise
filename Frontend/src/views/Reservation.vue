@@ -147,7 +147,7 @@ let router = useRouter();
 const authstore = useAuthStore();
 
 const roomData = ref([]);
-const parkingData = ref([]);
+const parkingData = ref([]); 
 const cruise = ref(null);
 const roomId = ref(null);
 
@@ -186,7 +186,6 @@ const submitReservation = async (formData) => {
 
 const getRoomId = async () => {
   try {
-    // console.log( formData.value.room_id +"   TEsttttt" )
     const { data } = await axios.get(`/api/getRoom_Id/` + formData.value.room_id);
     roomId.value = data;
     formData.value.room_id = data.roomId;

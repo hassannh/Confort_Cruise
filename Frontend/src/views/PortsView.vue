@@ -137,13 +137,14 @@
 </template>
 
 <script setup>
-
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import VuePagination from 'vue-pagination'
 import controleBar from '../components/controleBar.vue'
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+import { useRouter } from "vue-router";
+
+let router = useRouter();
 
 
 
@@ -164,6 +165,7 @@ const totalPages = ref(0);
         console.log(id);
         const response = await axios.delete(`/api/destroyPort/${id}`);
         ports.value = response.data.port.data;
+        router.push('/ports');
         console.log(response.data);
         
     }

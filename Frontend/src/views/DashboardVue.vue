@@ -146,11 +146,11 @@ import { useAuthStore } from "../stores";
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 import controleBar from '../components/controleBar.vue'
+import { useRouter } from "vue-router";
 
 
 
-
-
+let router = useRouter();
 const cruises = ref([]);
 let page = ref(1);
 const totalPages = ref(0);
@@ -167,6 +167,7 @@ const destroy = async (id) => {
   console.log(id);
   const response = await axios.delete(`/api/destroyCruise/${id}`);
   cruises.value = response.data.cruise.data;
+  router.push({ path: "/dashboard" });
   console.log(response.data);
 };
 
@@ -189,7 +190,7 @@ if (authStore) {
 }
 
 // add the component to the components property
-const components = {
+let components = {
   controleBar
 }
 </script>
